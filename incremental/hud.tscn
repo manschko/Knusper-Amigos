@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jib21ch5ked3" path="res://incremental/crumbs.gd" id="1_idtuo"]
 [ext_resource type="Script" uid="uid://ddimryknjvml3" path="res://incremental/upgrades/upgrade_debug_hud.gd" id="2_updbg"]
+[ext_resource type="PackedScene" uid="uid://eynwht55e534" path="res://ui/pause/pause_menu.tscn" id="3_sab5r"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=763744515]
 
@@ -78,6 +79,8 @@ text = "Speed Lv 0"
 [node name="BuySpeed" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=1290702912]
 layout_mode = 2
 text = "Buy Speed"
+
+[node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
 
 [connection signal="pressed" from="Crumbs/remove" to="crumbs" method="_on_remove_pressed"]
 [connection signal="pressed" from="Crumbs/add" to="crumbs" method="_on_add_pressed"]

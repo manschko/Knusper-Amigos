@@ -42,7 +42,7 @@ func save_stats() -> void:
 		return
 	file.store_string(JSON.stringify(stats))
 	file.close()
-	crumbs_updated.emit()
+	crumbs_updated.emit(stats["crumbs"])
 
 
 func load_stats() -> void:

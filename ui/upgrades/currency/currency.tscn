@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ccwtw2gyeh4ll"]
+
+[ext_resource type="Script" uid="uid://y2qd246hup6w" path="res://ui/upgrades/currency/currency.gd" id="1_0lo5h"]
+
+[node name="currency" type="HBoxContainer" unique_id=368576559]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0lo5h")
+
+[node name="icon" type="TextureRect" parent="." unique_id=1404457193]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+offset_transform_scale = Vector2(2, 2)
+expand_mode = 2
+
+[node name="label" type="Label" parent="." unique_id=1376600845]
+layout_mode = 2
+theme_override_constants/line_spacing = 22
+text = "0"

@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bamy6swh33hck"]
+
+[ext_resource type="Theme" uid="uid://b0vja5wtseub3" path="res://ui/UI_theme.tres" id="1_i74aa"]
+[ext_resource type="Script" uid="uid://bl1chhpei6a0v" path="res://ui/upgrades/upgrade_screen.gd" id="1_upsc"]
+[ext_resource type="PackedScene" uid="uid://o6nylovy4vtj" path="res://ui/upgrades/upgrade/upgrade.tscn" id="3_ck778"]
+[ext_resource type="PackedScene" uid="uid://ccwtw2gyeh4ll" path="res://ui/upgrades/currency/currency.tscn" id="4_h5bux"]
+[ext_resource type="Texture2D" uid="uid://dhfkfjri5b1u8" path="res://prototype/kenney_prototype-textures/PNG/Orange/texture_01.png" id="5_5vkvf"]
+[ext_resource type="Texture2D" uid="uid://fyd6bsoc8b0l" path="res://prototype/kenney_prototype-textures/PNG/Green/texture_01.png" id="6_5vkvf"]
+
+[node name="UpgradeScreen" type="Control" unique_id=599983885 node_paths=PackedStringArray("currency")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_i74aa")
+script = ExtResource("1_upsc")
+upgrade_component = ExtResource("3_ck778")
+currency = NodePath("MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/currency")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1099036365]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1043839372]
+layout_mode = 2
+theme = ExtResource("1_i74aa")
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=44462806]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2" unique_id=548096258]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer" unique_id=2094135818]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=152662097]
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 32
+text = "Upgrades"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=153804511]
+layout_mode = 2
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1245246270]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1516455241]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="currency" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=368576559 instance=ExtResource("4_h5bux")]
+layout_mode = 2
+icon = ExtResource("5_5vkvf")
+
+[node name="currency2" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1652223661 instance=ExtResource("4_h5bux")]
+layout_mode = 2
+icon = ExtResource("6_5vkvf")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer" unique_id=1732012879]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UpgradeList" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" unique_id=1031794143]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer" unique_id=2136305509]
+layout_mode = 2
+text = "Next run"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

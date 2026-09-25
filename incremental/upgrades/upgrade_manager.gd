@@ -1,5 +1,6 @@
 extends Node
 
+
 # Autoload: UpgradeManager
 #
 # Loads every Upgrade resource (.tres) found in UPGRADES_DIR, tracks how many
@@ -14,7 +15,7 @@ extends Node
 # has been bought" owned by the upgrade system, avoiding double-applying
 # bonuses when a save is reloaded.
 
-const UPGRADES_DIR := "res://incremental/upgrades/data/"
+
 const SAVE_PATH := "user://upgrades_save.json"
 
 signal upgrade_purchased(id: String, new_level: int)
@@ -25,30 +26,17 @@ var levels: Dictionary = {}     # id (String) -> int current level
 
 
 func _ready() -> void:
-	_load_upgrade_definitions()
+	_update_upgrade_definitions()
 	_load_levels()
 
 
-func _load_upgrade_definitions() -> void:
+func _update_upgrade_definitions() -> void:
 	upgrades.clear()
-	var dir := DirAccess.open(UPGRADES_DIR)
-	if dir == null:
-		push_warning("UpgradeManager: could not open '%s'" % UPGRADES_DIR)
-		return
+	upgrades = UpgradeUtils.load_upgrade_definitions()
+	
+	
+	
 
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-	while file_name != "":
-		if not dir.current_is_dir() and file_name.ends_with(".tres"):
-			var resource := load(UPGRADES_DIR + file_name)
-			if resource is Upgrade:
-				if upgrades.has(resource.id):
-					push_warning("UpgradeManager: duplicate upgrade id '%s' in '%s'" % [resource.id, file_name])
-				upgrades[resource.id] = resource
-			else:
-				push_warning("UpgradeManager: '%s' is not an Upgrade resource" % file_name)
-		file_name = dir.get_next()
-	dir.list_dir_end()
 
 
 func get_upgrade(id: String) -> Upgrade:

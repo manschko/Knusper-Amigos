@@ -23,6 +23,12 @@ UpgradeManager="*res://incremental/upgrades/upgrade_manager.gd"
 
 project/assembly_name="Knusper Amigos"
 
+[file_customization]
+
+folder_colors={
+"res://ui/": "green"
+}
+
 [input]
 
 jump={
