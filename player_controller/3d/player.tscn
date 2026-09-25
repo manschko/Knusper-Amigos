@@ -1,21 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3tf560egbc8g"]
+[gd_scene format=3 uid="uid://c3tf560egbc8g"]
 
-[ext_resource type="Script" uid="uid://eo5d7yel47id" path="res://addons/player_controller/3d/player.gd" id="1_x2kuh"]
-[ext_resource type="Script" uid="uid://b3ma2mus12o8j" path="res://addons/player_controller/3d/camera_3d.gd" id="2_am31l"]
+[ext_resource type="Script" uid="uid://eo5d7yel47id" path="res://player_controller/3d/player.gd" id="1_x2kuh"]
+[ext_resource type="Script" uid="uid://b3ma2mus12o8j" path="res://player_controller/3d/camera_3d.gd" id="2_am31l"]
+[ext_resource type="PackedScene" uid="uid://ix00v1whpwlb" path="res://incremental/hud.tscn" id="3_rf0yd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fsq37"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fsq37"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=1569197202]
 script = ExtResource("1_x2kuh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1700580211]
 shape = SubResource("CapsuleShape3D_fsq37")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1097929057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.399709, 0)
 script = ExtResource("2_am31l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1904168984]
 mesh = SubResource("CapsuleMesh_fsq37")
+
+[node name="CanvasLayer" parent="." unique_id=763744515 instance=ExtResource("3_rf0yd")]

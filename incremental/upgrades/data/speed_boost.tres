@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://incremental/upgrades/upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "speed_boost"
+display_name = "Quick Paws"
+description = "Increases movement speed."
+cost = 40
+max_level = 5
+cost_growth = 1.2
+stat_key = "speed"
+value_per_level = 0.5

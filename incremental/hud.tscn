@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://ix00v1whpwlb"]
+
+[ext_resource type="Script" uid="uid://jib21ch5ked3" path="res://incremental/crumbs.gd" id="1_idtuo"]
+[ext_resource type="Script" uid="uid://ddimryknjvml3" path="res://incremental/upgrades/upgrade_debug_hud.gd" id="2_updbg"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=763744515]
+
+[node name="Crumbs" type="Control" parent="." unique_id=94324981]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="remove" type="Button" parent="Crumbs" unique_id=110232051]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09200001
+anchor_top = 0.102000006
+anchor_right = 0.09200001
+anchor_bottom = 0.102000006
+offset_left = 478.016
+offset_top = 168.90399
+offset_right = 545.016
+offset_bottom = 199.90399
+text = "remove"
+
+[node name="add" type="Button" parent="Crumbs" unique_id=540985495]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09200001
+anchor_top = 0.102000006
+anchor_right = 0.09200001
+anchor_bottom = 0.102000006
+offset_left = 276.016
+offset_top = 154.90399
+offset_right = 315.016
+offset_bottom = 185.90399
+text = "Add"
+
+[node name="crumbs" type="RichTextLabel" parent="." unique_id=508328940]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "1000"
+script = ExtResource("1_idtuo")
+
+[node name="UpgradeDebug" type="Control" parent="." unique_id=345857655]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 220.0
+offset_right = 320.0
+offset_bottom = 340.0
+script = ExtResource("2_updbg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeDebug" unique_id=1851459227]
+layout_mode = 1
+offset_right = 300.0
+offset_bottom = 120.0
+
+[node name="DamageLabel" type="Label" parent="UpgradeDebug/VBoxContainer" unique_id=1024158836]
+layout_mode = 2
+text = "Damage Lv 0"
+
+[node name="BuyDamage" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=1889931177]
+layout_mode = 2
+text = "Buy Damage"
+
+[node name="SpeedLabel" type="Label" parent="UpgradeDebug/VBoxContainer" unique_id=2081979180]
+layout_mode = 2
+text = "Speed Lv 0"
+
+[node name="BuySpeed" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=1290702912]
+layout_mode = 2
+text = "Buy Speed"
+
+[connection signal="pressed" from="Crumbs/remove" to="crumbs" method="_on_remove_pressed"]
+[connection signal="pressed" from="Crumbs/add" to="crumbs" method="_on_add_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuyDamage" to="UpgradeDebug" method="_on_buy_damage_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuySpeed" to="UpgradeDebug" method="_on_buy_speed_pressed"]

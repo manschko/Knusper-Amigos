@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://b46id134v2qft"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "damage_boost"
+display_name = "A lot of DAMAGE"
+description = "Damage ist besser als Schaden"
+cost = 50
+stat_key = "damage"
+value_per_level = 2.0
