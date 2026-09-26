@@ -6,9 +6,12 @@ extends  CharacterBody3D
 @export var _attackDamage : float = 1;
 @export var _attackCooldown : float = 0.2;
 @export var _attackAnimationTime : float = 0.1;
+@export var _health : float = 100;
+@export var _value : int = 1;
 
 var _attackTimer : float = 0;
-@onready var _sprite = $Sprite3D
+@onready var _sprite = $Sprite3D;
+var _onDeathSignal : Signal;
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -45,6 +48,15 @@ func _processAttack() -> void:
 		return;
 	
 	velocity = Vector3.ZERO;
-	_player.take_damage(_attackDamage, position);
+	_player.take_damage(_attackDamage);
 	_attackTimer = _attackCooldown;
 	_sprite.frame = 1;
+	
+
+func take_damage(damage: float) -> void:
+	_health -= damage;
+	if _health > 0: return;
+	
+	_onDeathSignal.emit(_value);
+	queue_free()
+	
