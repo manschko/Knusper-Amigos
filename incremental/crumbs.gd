@@ -14,5 +14,5 @@ func _on_add_pressed() -> void:
 	Stats.add_crumbs(50)
 
 
-func updateDisplay(crumbs):
+func updateDisplay(crumbs: int):
 	text = str(crumbs)

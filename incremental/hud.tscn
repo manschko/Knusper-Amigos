@@ -1,38 +1,115 @@
 [gd_scene format=3 uid="uid://ix00v1whpwlb"]
 
 [ext_resource type="Script" uid="uid://jib21ch5ked3" path="res://incremental/crumbs.gd" id="1_idtuo"]
+[ext_resource type="Texture2D" uid="uid://k7s74d12yppu" path="res://assets/Krümelanzeige.png" id="1_ntajs"]
+[ext_resource type="FontFile" uid="uid://bro3pqugr8ho1" path="res://assets/Bungee-Regular.ttf" id="2_ix8mg"]
 [ext_resource type="Script" uid="uid://ddimryknjvml3" path="res://incremental/upgrades/upgrade_debug_hud.gd" id="2_updbg"]
 [ext_resource type="PackedScene" uid="uid://eynwht55e534" path="res://ui/pause/pause_menu.tscn" id="3_sab5r"]
 [ext_resource type="Script" uid="uid://co4nxo5v0uhyk" path="res://incremental/health_bar.gd" id="4_pib85"]
+[ext_resource type="Texture2D" uid="uid://c16qrh2q71wxi" path="res://assets/Lebensanzeige.png" id="4_t50we"]
+[ext_resource type="Texture2D" uid="uid://b2dfq0xv5g865" path="res://assets/Lebensanzeige_front.png" id="6_uj1cg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmu5l"]
-bg_color = Color(0.98454016, 0.75541365, 0.41698027, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.4012587, 0.26998115, 0.06644129, 1)
+bg_color = Color(0.9843137, 0.75686276, 0.41568628, 0)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgcak"]
-bg_color = Color(0.96340114, 0.37866557, 0.381398, 1)
+bg_color = Color(1, 0.627451, 0.22352941, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=763744515]
 
-[node name="crumbs" type="RichTextLabel" parent="." unique_id=508328940]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=220193133]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="krummel" type="Control" parent="MarginContainer" unique_id=1076304834]
+layout_mode = 2
+mouse_behavior_recursive = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/krummel" unique_id=678278535]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
+offset_left = -211.0
+offset_right = 844.0
+offset_bottom = 334.0
 grow_horizontal = 0
-text = "1000"
+scale = Vector2(0.2, 0.2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("1_ntajs")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/krummel/TextureRect" unique_id=767123371]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -87.5
+offset_right = 366.0
+offset_bottom = 87.5
+grow_vertical = 2
+theme_override_constants/margin_left = 452
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/krummel/TextureRect/MarginContainer" unique_id=1178652397]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/bold_font = ExtResource("2_ix8mg")
+theme_override_font_sizes/normal_font_size = 128
+text = "10000"
+fit_content = true
+autowrap_mode = 0
 script = ExtResource("1_idtuo")
 
+[node name="health" type="Control" parent="MarginContainer" unique_id=384742466]
+layout_mode = 2
+mouse_behavior_recursive = 1
+
+[node name="healthBackground" type="TextureRect" parent="MarginContainer/health" unique_id=555091439]
+layout_mode = 0
+offset_right = 1938.0
+offset_bottom = 364.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_t50we")
+flip_h = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/health" unique_id=1306369635]
+layout_mode = 0
+offset_right = 371.035
+offset_bottom = 53.5
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+
+[node name="healthBar" type="ProgressBar" parent="MarginContainer/health/MarginContainer" unique_id=1043917419]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_mmu5l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hgcak")
+value = 50.0
+script = ExtResource("4_pib85")
+
+[node name="HealthForeground" type="TextureRect" parent="MarginContainer/health" unique_id=2087902699]
+layout_mode = 0
+offset_right = 1938.0
+offset_bottom = 364.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_uj1cg")
+flip_h = true
+
 [node name="UpgradeDebug" type="Control" parent="." unique_id=345857655]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
@@ -74,19 +151,9 @@ text = "Buy Speed"
 layout_mode = 2
 text = "remove health"
 
-[node name="healthBar" type="ProgressBar" parent="." unique_id=1043917419]
-offset_right = 286.0
-offset_bottom = 27.0
-theme_override_styles/background = SubResource("StyleBoxFlat_mmu5l")
-theme_override_styles/fill = SubResource("StyleBoxFlat_hgcak")
-value = 50.0
-script = ExtResource("4_pib85")
-
 [node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
 visible = false
 
-[connection signal="pressed" from="UpgradeDebug/VBoxContainer/add" to="crumbs" method="_on_add_pressed"]
-[connection signal="pressed" from="UpgradeDebug/VBoxContainer/remove" to="crumbs" method="_on_remove_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuyDamage" to="UpgradeDebug" method="_on_buy_damage_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuySpeed" to="UpgradeDebug" method="_on_buy_speed_pressed"]
-[connection signal="pressed" from="UpgradeDebug/VBoxContainer/health" to="healthBar" method="_on_health_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/health" to="MarginContainer/health/MarginContainer/healthBar" method="_on_health_pressed"]
