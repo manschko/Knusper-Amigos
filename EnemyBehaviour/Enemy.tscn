@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bxlwlnu2h12d8"]
+
+[ext_resource type="Script" uid="uid://b2fw0krv5k4yd" path="res://EnemyBehaviour/EnemyBahaviour.gd" id="1_kwuay"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtt4n"]
+size = Vector3(0.5, 1, 0.1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ae68y"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=928747577]
+script = ExtResource("1_kwuay")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345111102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_xtt4n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=173893819]
+transform = Transform3D(0.25, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_ae68y")
