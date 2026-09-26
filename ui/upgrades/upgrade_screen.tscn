@@ -16,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_i74aa")
 script = ExtResource("1_upsc")
+back_scene = "res://GameScene.tscn"
 upgrade_component = ExtResource("3_ck778")
 currency = NodePath("MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/currency")
 

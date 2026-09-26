@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b2t6tf1jmrg6f"]
 
-[ext_resource type="Script" uid="uid://dh6d8x3up2bo8" path="res://enemy_sparne/enemy.gd" id="1_nnahs"]
+[ext_resource type="Script" uid="uid://dh6d8x3up2bo8" path="res://gameManager/enemy.gd" id="1_nnahs"]
 [ext_resource type="Script" uid="uid://c8ygk4sqfvwfy" path="res://player_controller/3d/camera.gd" id="2_ol66e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_61l26"]

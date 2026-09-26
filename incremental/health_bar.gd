@@ -1,9 +1,10 @@
 extends ProgressBar
 
 
+var player: Player
 
 func _ready() -> void:
-	var player := find_player_ancestor()
+	player = find_player_ancestor()
 	if player:
 		player.health_changed.connect(update_health)
 
@@ -21,3 +22,8 @@ func find_player_ancestor() -> Player:
 func update_health(current: float, max_health: float):
 	max_value = max_health
 	value = current
+
+
+func _on_health_pressed() -> void:
+	if player:
+		player.take_damage(30.0)
