@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://xhf0x2gi7b0o"]
+
+[ext_resource type="Script" path="res://enemy_sparne/enemy.gd" id="1_fb3t6"]
+[ext_resource type="Script" uid="uid://c8ygk4sqfvwfy" path="res://player_controller/3d/camera.gd" id="2_vd578"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_61l26"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b3pp2"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=445801679]
+script = ExtResource("1_fb3t6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=919254715]
+mesh = SubResource("CapsuleMesh_61l26")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=664740656]
+shape = SubResource("CapsuleShape3D_b3pp2")
+disabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=355517094]
+script = ExtResource("2_vd578")
