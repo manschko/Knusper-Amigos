@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://o6nylovy4vtj"]
+
+[ext_resource type="Texture2D" uid="uid://crwt2wi0hpffh" path="res://prototype/craftpix-tiny-hero-sprites/1 Pink_Monster/Pink_Monster.png" id="1_141gf"]
+[ext_resource type="Script" uid="uid://bjwj0cuckk4lt" path="res://ui/upgrades/upgrade/upgrade.gd" id="1_pgj5t"]
+[ext_resource type="Theme" uid="uid://b0vja5wtseub3" path="res://ui/UI_theme.tres" id="2_vwur3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgj5t"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="PanelContainer" type="PanelContainer" unique_id=532352037]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pgj5t")
+script = ExtResource("1_pgj5t")
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1560417816]
+layout_mode = 2
+theme_override_constants/margin_right = 4
+
+[node name="Button" type="Button" parent="MarginContainer2" unique_id=1907304688]
+layout_mode = 2
+theme = ExtResource("2_vwur3")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2" unique_id=2047228559]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer" unique_id=1641759643]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/HBoxContainer" unique_id=1113428801]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/MarginContainer/HBoxContainer/MarginContainer" unique_id=387328447]
+texture_filter = 1
+layout_mode = 2
+offset_transform_scale = Vector2(3, 3)
+mouse_filter = 2
+texture = ExtResource("1_141gf")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer/HBoxContainer" unique_id=2081263202]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=891032921]
+layout_mode = 2
+text = "Upgrade 0/5"
+
+[node name="description" type="Label" parent="MarginContainer2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=16549495]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "This Upgrade is awesome and lets you dig faster"
+
+[node name="Cost" type="Label" parent="MarginContainer2/MarginContainer/HBoxContainer/VBoxContainer" unique_id=905450789]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "10 Coal, 2 Gold"
+
+[connection signal="pressed" from="MarginContainer2/Button" to="." method="_on_button_pressed"]

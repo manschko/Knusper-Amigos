@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://incremental/upgrades/player_stats.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+health = 100.0
+walk_speed = 5.0
+sprint_speed = 10.0
+damage = 10.0

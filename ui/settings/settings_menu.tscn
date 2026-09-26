@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://cl0vl037l6o4k"]
+
+[ext_resource type="Script" uid="uid://b5r4lh5t4ywoo" path="res://ui/settings/SettingsHandlers.gd" id="1_v136q"]
+[ext_resource type="Theme" uid="uid://b0vja5wtseub3" path="res://ui/UI_theme.tres" id="2_fr2hu"]
+[ext_resource type="PackedScene" uid="uid://i57rc6qu4fnj" path="res://ui/settings/Elements/Slider/slider.tscn" id="3_fr2hu"]
+[ext_resource type="PackedScene" uid="uid://cbsul4i64owcr" path="res://ui/settings/Elements/toggle/toggle.tscn" id="4_toggle"]
+[ext_resource type="PackedScene" uid="uid://ylqfpxncgodc" path="res://ui/settings/Elements/Select/select.tscn" id="5_select"]
+
+[node name="Control" type="Control" unique_id=2067214690]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v136q")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=2020566245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fr2hu")
+current_tab = 2
+
+[node name="Sound" type="MarginContainer" parent="TabContainer" unique_id=1741372608]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 0
+
+[node name="Sound" type="VBoxContainer" parent="TabContainer/Sound" unique_id=66979906]
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Music" parent="TabContainer/Sound/Sound" unique_id=784140164 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+setting_title = "Music"
+setting_key = "Music"
+
+[node name="SFX" parent="TabContainer/Sound/Sound" unique_id=1608783647 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+setting_title = "SFX"
+setting_key = "SFX"
+
+[node name="Master" parent="TabContainer/Sound/Sound" unique_id=435059889 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+setting_title = "Master"
+setting_key = "Master"
+
+[node name="Control" type="MarginContainer" parent="TabContainer" unique_id=1247335686]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 1
+
+[node name="Control" type="VBoxContainer" parent="TabContainer/Control" unique_id=-1284967295]
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="MouseSensitivity" parent="TabContainer/Control/Control" unique_id=-1284967294 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+min_val = 1.0
+setting_title = "Mouse Sensitivity"
+setting_key = "mouse_sensitivity"
+
+[node name="InvertMouseY" parent="TabContainer/Control/Control" unique_id=-1284967293 instance=ExtResource("4_toggle")]
+layout_mode = 2
+setting_title = "Invert Mouse Y"
+setting_key = "invert_mouse_y"
+
+[node name="GamepadVibration" parent="TabContainer/Control/Control" unique_id=-1284967292 instance=ExtResource("4_toggle")]
+layout_mode = 2
+start_val = true
+setting_title = "Gamepad Vibration"
+setting_key = "gamepad_vibration"
+
+[node name="Graphics" type="MarginContainer" parent="TabContainer" unique_id=839159439]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 2
+
+[node name="Graphics" type="VBoxContainer" parent="TabContainer/Graphics" unique_id=-1274967295]
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Fullscreen" parent="TabContainer/Graphics/Graphics" unique_id=-1274967294 instance=ExtResource("5_select")]
+layout_mode = 2
+values = Array[String](["Windowed", "Fullscreen", "Borderless"])
+start_val = "Windowed"
+setting_title = "Fullscreen"
+setting_key = "fullscreen"
+
+[node name="Resolution" parent="TabContainer/Graphics/Graphics" unique_id=-1274967293 instance=ExtResource("5_select")]
+layout_mode = 2
+values = Array[String](["1280x720", "1600x900", "1920x1080", "2560x1440"])
+start_val = "1920x1080"
+setting_title = "Resolution"
+setting_key = "resolution"
+
+[node name="FrameRateLimit" parent="TabContainer/Graphics/Graphics" unique_id=-1274967292 instance=ExtResource("5_select")]
+layout_mode = 2
+values = Array[String](["30", "60", "120", "unlimited"])
+start_val = "60"
+setting_title = "Frame Rate Limit"
+setting_key = "frame_rate_limit"
+
+[node name="VSync" parent="TabContainer/Graphics/Graphics" unique_id=-1274967291 instance=ExtResource("4_toggle")]
+layout_mode = 2
+start_val = true
+setting_title = "VSync"
+setting_key = "vsync"
+
+[node name="CloseButton" type="Button" parent="." unique_id=1044645706]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme = ExtResource("2_fr2hu")
+text = "X"

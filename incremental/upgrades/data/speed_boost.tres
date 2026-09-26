@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://db6qux2jl0bpw"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "speed_boost"
+display_name = "Bein Länge"
+description = "so schnell wie der Wind"
+cost = 40
+max_level = 5
+cost_growth = 1.2
+stat_key = "walk_speed"
+value_per_level = 5.0
