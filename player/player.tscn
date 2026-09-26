@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://eo5d7yel47id" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://kejqyvhe8sxh" path="res://player/projectiles/butter.tscn" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://ix00v1whpwlb" path="res://incremental/hud.tscn" id="3_rf0yd"]
-[ext_resource type="Resource" path="res://incremental/upgrades/base_player_stats.tres" id="4_stats"]
+[ext_resource type="Resource" path="res://player/base_player_stats.tres" id="4_stats"]
+[ext_resource type="Script" uid="uid://pojer0ijejb7" path="res://player/texture_rect.gd" id="5_boad6"]
+[ext_resource type="Texture2D" uid="uid://53fw2x73gvsx" path="res://assets/Hand_.png" id="5_qjkh3"]
+[ext_resource type="Texture2D" uid="uid://dyakbvmj700rd" path="res://assets/Hand__Wurf.png" id="6_rgyib"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fsq37"]
 
@@ -72,5 +75,28 @@ script = SubResource("GDScript_rf0yd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1904168984]
 mesh = SubResource("CapsuleMesh_fsq37")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1865862510]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2" unique_id=777146935]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -402.99988
+offset_top = -266.00006
+offset_right = 597.0
+offset_bottom = 734.00024
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.5235988
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_qjkh3")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("5_boad6")
+holding = ExtResource("5_qjkh3")
+throwing = ExtResource("6_rgyib")
 
 [node name="CanvasLayer" parent="." unique_id=763744515 instance=ExtResource("3_rf0yd")]

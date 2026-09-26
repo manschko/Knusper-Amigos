@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cf0dw4af5l6t5"]
 
+[ext_resource type="Texture2D" uid="uid://53fw2x73gvsx" path="res://assets/Hand_.png" id="3_6wqrl"]
 [ext_resource type="PackedScene" uid="uid://ix00v1whpwlb" path="res://incremental/hud.tscn" id="3_rf0yd"]
-[ext_resource type="Resource" path="res://incremental/upgrades/base_player_stats.tres" id="4_stats"]
+[ext_resource type="Resource" path="res://player/base_player_stats.tres" id="4_stats"]
 
 [sub_resource type="GDScript" id="GDScript_ebmhy"]
 script/source = "# The script is attached to a CharacterBody3D node.
@@ -203,3 +204,20 @@ script = SubResource("GDScript_rf0yd")
 mesh = SubResource("CapsuleMesh_fsq37")
 
 [node name="CanvasLayer" parent="." unique_id=763744515 instance=ExtResource("3_rf0yd")]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1980781247]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -204.00006
+offset_right = 795.0
+offset_bottom = 796.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_6wqrl")
+expand_mode = 1
+stretch_mode = 4

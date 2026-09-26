@@ -1,3 +1,4 @@
+@tool
 extends RigidBody3D
 
 
@@ -45,6 +46,7 @@ func _on_body_entered(body: Node) -> void:
 	if body is EnemyBahaviour:
 		body.take_damage(damage);
 		var nSplash : Splash = splashObject.instantiate();
-		get_tree().current_scene.add_child(nSplash);
 		nSplash.position = position;
+		get_tree().current_scene.add_child(nSplash);
+		
 	queue_free() # destroy projectile
