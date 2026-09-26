@@ -37,15 +37,17 @@ func _build_upgrade_row(upgrade: Upgrade) -> Control:
 		printerr("upgradeComponente missing from upgrade screen")
 		return
 	
-	var component: Upgrade_UI = upgrade_component.instantiate()
+	var component: UpgradeRow = upgrade_component.instantiate()
 	upgrade_list.add_child(component)
 	var level := UpgradeManager.get_level(upgrade.id)
 	var maxed := UpgradeManager.is_maxed(upgrade.id)
 
-	component.set_label("%s %d/%d" % [upgrade.display_name, level, upgrade.max_level])
+	component.set_title(upgrade.display_name)
+	component.set_level(level, upgrade.max_level)
 	component.set_description(upgrade.description if upgrade.description else "")
 	component.set_cost("MAXED" if maxed else _format_cost(upgrade.get_cost(level)))
 	component.set_icon(upgrade.icon)
+	component.set_disabled(maxed or not UpgradeManager.can_afford(upgrade.id))
 	component.upgrade_pressed.connect(_on_buy_pressed.bind(upgrade))
 
 
