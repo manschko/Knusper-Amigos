@@ -65,8 +65,9 @@ func handle_inputs(delta: float):
 	if Input.is_action_just_pressed("shoot") and shot_cooldown <= shoot_timer:
 		shoot_timer = 0.0
 		var projectile = projectile.instantiate()
-		var direction = camera.global_basis * Vector3.FORWARD
-		var muzzle_offset = Vector3(0.5, -0.3, -0.5)
+		const tilt_up_deg = 15
+		var direction = camera.global_basis.rotated(camera.global_basis.x, deg_to_rad(tilt_up_deg)) * Vector3.FORWARD
+		var muzzle_offset = Vector3(0.5, -0.3, 0)
 		projectile.position = camera.global_transform * muzzle_offset
 		projectile.linear_velocity = direction * projectile_force + get_inherited_projectile_velocity(direction)
 		projectile.damage = stats.damage
@@ -147,7 +148,7 @@ func handle_movement(delta):
 	
 	Input.is_action_just_pressed("sprint")
 	if Input.is_action_pressed("sprint"):
-		speed = lerp(speed, speed * stats.sprint_multi, delta)
+		speed = lerp(speed, stats.walk_speed * stats.sprint_multi, delta)
 	else:
 		speed = lerp(speed, stats.walk_speed, delta)
 
