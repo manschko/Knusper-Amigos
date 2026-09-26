@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://bjmyu7on8e5rc" path="res://Shader/Boden.tres" id="2_b67b1"]
 [ext_resource type="Texture2D" uid="uid://bdqbett1y1l06" path="res://prototype/kenney_prototype-textures/PNG/Dark/texture_09.png" id="3_13l85"]
 [ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="3_i2arf"]
-[ext_resource type="PackedScene" uid="uid://bwxffyaxpjfd" path="res://Shader/border.tscn" id="5_fojsm"]
+[ext_resource type="PackedScene" uid="uid://c6jw2xtjwkkpx" path="res://Shader/Border.tscn" id="5_fojsm"]
 
 [sub_resource type="Environment" id="Environment_n74t5"]
 background_mode = 1
@@ -39,4 +39,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53839, 1, 0)
 use_collision = true
 material = SubResource("StandardMaterial3D_5f3fc")
 
-[node name="Border" parent="." unique_id=748318838 instance=ExtResource("5_fojsm")]
+[node name="Border" parent="." unique_id=772244939 instance=ExtResource("5_fojsm")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
