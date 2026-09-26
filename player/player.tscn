@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://c3tf560egbc8g"]
 
 [ext_resource type="Script" uid="uid://eo5d7yel47id" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="PackedScene" uid="uid://kejqyvhe8sxh" path="res://player/projectiles/butter.tscn" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://ix00v1whpwlb" path="res://incremental/hud.tscn" id="3_rf0yd"]
+[ext_resource type="Resource" path="res://incremental/upgrades/base_player_stats.tres" id="4_stats"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fsq37"]
 
@@ -58,6 +60,8 @@ func toggle_menu():
 [node name="MainPlayer" type="CharacterBody3D" unique_id=1569197202]
 collision_layer = 2
 script = ExtResource("1_rkbax")
+base_stats = ExtResource("4_stats")
+projectile = ExtResource("3_qjkh3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1700580211]
 shape = SubResource("CapsuleShape3D_fsq37")

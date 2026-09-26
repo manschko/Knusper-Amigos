@@ -33,4 +33,5 @@ material = SubResource("StandardMaterial3D_5f3fc")
 
 [node name="MainPlayer" parent="." unique_id=1569197202 instance=ExtResource("1_fau70")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5378692, 0)
+shot_cooldown = 0.02
 projectile = ExtResource("3_i32mp")

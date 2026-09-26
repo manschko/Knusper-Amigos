@@ -37,5 +37,6 @@ func _on_settings_close() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().paused = false
-	pause = false
+	get_tree().quit()
+	#get_tree().paused = false
+	#pause = false

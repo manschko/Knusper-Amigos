@@ -5,7 +5,7 @@ extends Control
 ## (res://resources/upgrades/*.tres) - add/edit/tweak upgrades there, this
 ## screen needs no changes to reflect them.
 
-@export var back_scene: PackedScene
+@export_file("*.tscn") var back_scene: String
 @export var upgrade_component: PackedScene
 @export var currency: Currency
 
@@ -61,7 +61,8 @@ func _on_buy_pressed(upgrade: Upgrade) -> void:
 func _on_back_button_pressed() -> void:
 	hide()
 	upgrades_closed.emit()
-	#if back_scene:
-		#get_tree().change_scene_to_packed(back_scene)
-	#else:
+	if back_scene:
+		get_tree().change_scene_to_file(back_scene)
+	else:
+		pass
 		#get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")

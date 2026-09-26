@@ -59,8 +59,13 @@ func handle_inputs(delta: float):
 		var projectile = projectile.instantiate()
 		var force = 20
 		var direction = camera.global_basis * Vector3.FORWARD
-		projectile.position = position
+		# Spawn from the bottom-right of the camera (like a hip-fired
+		# weapon) instead of dead center, while still firing toward
+		# where the camera is looking.
+		var muzzle_offset = Vector3(0.5, -0.3, -0.5)
+		projectile.position = camera.global_transform * muzzle_offset
 		projectile.linear_velocity = direction * force
+		projectile.damage = stats.damage
 		get_parent().add_child(projectile)
 		print("Shoot!")
 	

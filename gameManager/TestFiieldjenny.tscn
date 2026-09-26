@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c3tf560egbc8g" path="res://player/player.tscn" id="1_nyjdu"]
 [ext_resource type="Texture2D" uid="uid://bdqbett1y1l06" path="res://prototype/kenney_prototype-textures/PNG/Dark/texture_09.png" id="2_a14il"]
-[ext_resource type="PackedScene" uid="uid://bbpf4p6oafovi" path="res://enemy_sparne/en_spaw.tscn" id="3_amih1"]
-[ext_resource type="PackedScene" uid="uid://b2t6tf1jmrg6f" path="res://enemy_sparne/ENEMY.tscn" id="4_7mfi6"]
+[ext_resource type="PackedScene" uid="uid://bbpf4p6oafovi" path="res://gameManager/gameManager.tscn" id="3_amih1"]
+[ext_resource type="PackedScene" uid="uid://b2t6tf1jmrg6f" path="res://gameManager/ENEMY.tscn" id="4_7mfi6"]
 [ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="4_l4ykf"]
 
 [sub_resource type="Environment" id="Environment_n74t5"]

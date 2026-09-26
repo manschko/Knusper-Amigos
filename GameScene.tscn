@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://0iw0eddvawcl"]
 
-[ext_resource type="PackedScene" uid="uid://c3tf560egbc8g" path="res://player_controller/3d/player.tscn" id="1_fwlvc"]
+[ext_resource type="PackedScene" uid="uid://c3tf560egbc8g" path="res://player/player.tscn" id="1_fwlvc"]
+[ext_resource type="PackedScene" uid="uid://bbpf4p6oafovi" path="res://gameManager/gameManager.tscn" id="1_hvuor"]
 [ext_resource type="Material" uid="uid://bjmyu7on8e5rc" path="res://Shader/Boden.tres" id="2_b67b1"]
 [ext_resource type="Texture2D" uid="uid://bdqbett1y1l06" path="res://prototype/kenney_prototype-textures/PNG/Dark/texture_09.png" id="3_13l85"]
+[ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="3_i2arf"]
 [ext_resource type="PackedScene" uid="uid://bwxffyaxpjfd" path="res://Shader/border.tscn" id="5_fojsm"]
 
 [sub_resource type="Environment" id="Environment_n74t5"]
@@ -13,7 +15,12 @@ background_color = Color(0.722687, 0.815274, 1, 1)
 albedo_texture = ExtResource("3_13l85")
 uv1_scale = Vector3(100, 100, 100)
 
-[node name="TestFiield" type="Node3D" unique_id=237595271]
+[node name="GameField" type="Node3D" unique_id=237595271]
+
+[node name="GameManager" parent="." unique_id=560973131 instance=ExtResource("1_hvuor")]
+playerScene = ExtResource("1_fwlvc")
+enemy = ExtResource("3_i2arf")
+upgradeScene = "res://ui/upgrades/upgrade_screen.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1457598361]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16095, 0)
@@ -21,10 +28,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D" unique_id=1786488110]
 environment = SubResource("Environment_n74t5")
-
-[node name="Player" parent="." unique_id=803607447 instance=ExtResource("1_fwlvc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.14018, 0)
-jump_cut_multiplier = 0.4
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1616090276]
 transform = Transform3D(300, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
