@@ -83,6 +83,7 @@ value = 50.0
 script = ExtResource("4_pib85")
 
 [node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
+visible = false
 
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/add" to="crumbs" method="_on_add_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/remove" to="crumbs" method="_on_remove_pressed"]

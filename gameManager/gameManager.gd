@@ -10,6 +10,7 @@ var total_enemy = 50
 var enemys_spawned = 0
 var wave_bonus = 0.5
 var wave_timer = 0.0
+var wave_count = 1
 
 
 var player: Player
@@ -24,12 +25,14 @@ func _ready():
 func _process(delta: float) -> void:
 	elapsed_time += delta
 	wave_timer += delta
-	if wave_timer <= 45.0: 
+	if wave_timer >= 45.0: 
 		enemy_count = 0
 		enemy_death = 0
 		total_enemy += total_enemy * wave_bonus
 		enemys_spawned = 0
 		wave_timer = 0.0
+		wave_count += 1
+		#difficulty.apply()
 		
 	spawn_enemy(delta)
 	
@@ -53,28 +56,40 @@ func spawn_enemy(delta: float) -> void:
 	if timer >= 0.0: 
 		return
 		
-	timer = randi_range(1, 10)
+	timer = randf_range(0, (5 / wave_timer + 1))
 	if not enemy:
 		print("no Enemy")
 		return
-	
+	print(enemy_count)
 	if enemy_count < 5 :
 		while (enemys_spawned != total_enemy && enemy_count < 5):
 			var neuer_enemy: EnemyBahaviour = enemy.instantiate()
 			neuer_enemy._player = player
+			var enemy_stats: EnemyStats = UpgradeManager.get_effective_enemy_stats(neuer_enemy.base_stats)
+			if difficulty:
+				enemy_stats = difficulty.apply(enemy_stats, elapsed_time)
+			neuer_enemy.stats = enemy_stats
 			neuer_enemy._onDeathSignal.connect(on_enemy_death)
 			get_tree().current_scene.add_child(neuer_enemy)
 			neuer_enemy.global_position = set_pos()
 			enemy_count += 1
 			enemys_spawned += 1
-	elif not enemys_spawned == total_enemy:
-		var neuer_enemy: EnemyBahaviour = enemy.instantiate()
-		neuer_enemy._player = player
-		neuer_enemy._onDeathSignal.connect(on_enemy_death)
-		get_tree().current_scene.add_child(neuer_enemy)
-		neuer_enemy.global_position = set_pos()
-		enemy_count += 1
-		enemys_spawned += 1
+	elif not enemys_spawned >= total_enemy:
+		var i = wave_count
+		while i > 0:
+			var neuer_enemy: EnemyBahaviour = enemy.instantiate()
+			neuer_enemy._player = player
+			var enemy_stats: EnemyStats = UpgradeManager.get_effective_enemy_stats(neuer_enemy.base_stats)
+			if difficulty:
+				enemy_stats = difficulty.apply(enemy_stats, elapsed_time)
+			neuer_enemy.stats = enemy_stats
+			neuer_enemy._onDeathSignal.connect(on_enemy_death)
+			get_tree().current_scene.add_child(neuer_enemy)
+			neuer_enemy.global_position = set_pos()
+			enemy_count += 1
+			enemys_spawned += 1
+			i -= 1
+
 
 func set_pos():
 	var z = player.position.z
@@ -86,15 +101,5 @@ func set_pos():
 	var spawn_position = Vector3(
 	dx,
 	player.position.y,
-	dz)
-	var neuer_enemy: EnemyBahaviour = enemy.instantiate()
-	neuer_enemy._player = player
-	var enemy_stats: EnemyStats = UpgradeManager.get_effective_enemy_stats(neuer_enemy.base_stats)
-	if difficulty:
-		enemy_stats = difficulty.apply(enemy_stats, elapsed_time)
-	neuer_enemy.stats = enemy_stats
-	neuer_enemy._onDeathSignal.connect(on_enemy_death)
-	get_tree().current_scene.add_child(neuer_enemy)
-
-	neuer_enemy.global_position = spawn_position
+	dz)	
 	return spawn_position
