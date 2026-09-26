@@ -1,7 +1,19 @@
 [gd_resource type="Theme" format=3 uid="uid://dva7i00opp3hk"]
 
-[ext_resource type="StyleBox" uid="uid://cv2ts67c6s27q" path="res://ui/theme/button_normal.tres" id="1_giyt4"]
 [ext_resource type="FontFile" uid="uid://bro3pqugr8ho1" path="res://assets/Bungee-Regular.ttf" id="2_bungee"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+content_margin_left = 64.0
+content_margin_top = 16.0
+content_margin_right = 64.0
+content_margin_bottom = 24.0
+bg_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
+border_width_bottom = 16
+border_color = Color(0.3647059, 0.3882353, 0.19607843, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwur3"]
 content_margin_left = 64.0
@@ -90,8 +102,8 @@ default_font = ExtResource("2_bungee")
 Button/font_sizes/font_size = 50
 Button/fonts/font = ExtResource("2_bungee")
 Button/styles/hover = SubResource("StyleBoxFlat_vwur3")
-Button/styles/normal = ExtResource("1_giyt4")
-Button/styles/pressed = ExtResource("1_giyt4")
+Button/styles/normal = SubResource("StyleBoxFlat_btn_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_btn_normal")
 Label/fonts/font = ExtResource("2_bungee")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_textm")
 RichTextLabel/fonts/bold_font = ExtResource("2_bungee")
