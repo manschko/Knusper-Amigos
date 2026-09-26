@@ -14,6 +14,7 @@ const BORDER_HOVER := Color(0.7176471, 0.9019608, 0.2509804, 1)
 @onready var description_label: Label = %DescriptionLabel
 @onready var level_bar: ProgressBar = %LevelBar
 @onready var icon_rect: TextureRect = %Icon
+@onready var icon_frame: PanelContainer = %IconFrame
 @onready var buy_button: Button = %BuyButton
 
 var _style: StyleBoxFlat
@@ -46,6 +47,7 @@ func set_cost(text: String) -> void:
 
 func set_icon(texture: Texture2D) -> void:
 	icon_rect.texture = texture
+	icon_frame.visible = texture != null
 
 func set_disabled(disabled: bool) -> void:
 	buy_button.disabled = disabled

@@ -1,18 +1,20 @@
 [gd_resource type="Theme" format=3 uid="uid://dva7i00opp3hk"]
 
 [ext_resource type="StyleBox" uid="uid://cv2ts67c6s27q" path="res://ui/theme/button_normal.tres" id="1_giyt4"]
-
-[sub_resource type="FontVariation" id="FontVariation_avxsn"]
+[ext_resource type="FontFile" uid="uid://bro3pqugr8ho1" path="res://assets/Bungee-Regular.ttf" id="2_bungee"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwur3"]
+content_margin_left = 64.0
+content_margin_top = 16.0
+content_margin_right = 64.0
+content_margin_bottom = 24.0
 bg_color = Color(0.3647059, 0.3882353, 0.19607843, 1)
-border_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="FontVariation" id="FontVariation_wwpnm"]
+border_width_bottom = 16
+border_color = Color(0.2, 0.21, 0.13, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_textm"]
 bg_color = Color(0.2627451, 0.26666668, 0.17254902, 1)
@@ -52,27 +54,57 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y38bs"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+bg_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grab_hover"]
+bg_color = Color(0.82, 0.96, 0.45, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grab_pressed"]
+bg_color = Color(0.5, 0.64, 0.17, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_track"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.12, 0.125, 0.08, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [resource]
+default_font = ExtResource("2_bungee")
 Button/font_sizes/font_size = 50
-Button/fonts/font = SubResource("FontVariation_avxsn")
+Button/fonts/font = ExtResource("2_bungee")
 Button/styles/hover = SubResource("StyleBoxFlat_vwur3")
 Button/styles/normal = ExtResource("1_giyt4")
 Button/styles/pressed = ExtResource("1_giyt4")
-Label/fonts/font = SubResource("FontVariation_wwpnm")
+Label/fonts/font = ExtResource("2_bungee")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_textm")
-RichTextLabel/fonts/bold_font = null
-RichTextLabel/fonts/bold_italics_font = null
-RichTextLabel/fonts/italics_font = null
-RichTextLabel/fonts/mono_font = null
-RichTextLabel/fonts/normal_font = null
+RichTextLabel/fonts/bold_font = ExtResource("2_bungee")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_bungee")
+RichTextLabel/fonts/italics_font = ExtResource("2_bungee")
+RichTextLabel/fonts/mono_font = ExtResource("2_bungee")
+RichTextLabel/fonts/normal_font = ExtResource("2_bungee")
 TabContainer/styles/panel = null
 TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_s2toc")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_canil")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_jl7vu")
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_y38bs")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_grab_hover")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_grab_pressed")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_scroll_track")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_scroll_track")

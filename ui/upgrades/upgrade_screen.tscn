@@ -44,21 +44,27 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2" unique_id=548096258]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer" unique_id=2094135818]
 layout_mode = 2
+theme_override_constants/separation = 24
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=152662097]
 layout_mode = 2
-theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 32
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.125, 0.08, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 72
 text = "Upgrades"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=1245246270]
 layout_mode = 2
-theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_bottom = 5
+size_flags_vertical = 4
+theme_override_constants/margin_right = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/HBoxContainer/MarginContainer" unique_id=1516455241]
 layout_mode = 2
@@ -75,8 +81,15 @@ alignment = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer" unique_id=1732012879]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="UpgradeList" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer" unique_id=1031794143]
+[node name="ListMargin" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 20
+
+[node name="UpgradeList" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/ListMargin" unique_id=1031794143]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16

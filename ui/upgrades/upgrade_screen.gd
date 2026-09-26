@@ -9,7 +9,7 @@ extends Control
 @export var upgrade_component: PackedScene
 @export var currency: Currency
 
-@onready var upgrade_list: VBoxContainer = $MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/UpgradeList
+@onready var upgrade_list: VBoxContainer = %UpgradeList
 
 signal upgrades_closed
 
@@ -28,8 +28,16 @@ func _rebuild_upgrade_list() -> void:
 	for child in upgrade_list.get_children():
 		child.queue_free()
 
-	
+	# Maxed upgrades go to the bottom; otherwise keep the original order.
+	var available: Array = []
+	var maxed: Array = []
 	for upgrade in UpgradeManager.upgrades.values():
+		if UpgradeManager.is_maxed(upgrade.id):
+			maxed.append(upgrade)
+		else:
+			available.append(upgrade)
+
+	for upgrade in available + maxed:
 		_build_upgrade_row(upgrade)
 
 func _build_upgrade_row(upgrade: Upgrade) -> Control:
