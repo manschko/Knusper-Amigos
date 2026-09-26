@@ -2,16 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b2fw0krv5k4yd" path="res://EnemyBehaviour/EnemyBahaviour.gd" id="1_kwuay"]
 [ext_resource type="Texture2D" uid="uid://bnyk87wr0e8tv" path="res://assets/Enemy1Spritesheet.png" id="2_7f1kg"]
+[ext_resource type="Resource" path="res://EnemyBehaviour/base_enemy_stats.tres" id="3_stats"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xtt4n"]
 size = Vector3(1, 1.355, 0.1)
 
 [node name="Enemy" type="CharacterBody3D" unique_id=928747577]
 script = ExtResource("1_kwuay")
-_speed = 1.0
-_attackRange = 2.0
-_attackCooldown = 1.0
-_attackAnimationTime = 0.5
+base_stats = ExtResource("3_stats")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345111102]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67749023, 0)
