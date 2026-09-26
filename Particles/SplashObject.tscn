@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://djngex0pr3fif"]
+
+[ext_resource type="Script" uid="uid://bpe58vqbxs60v" path="res://Particles/Splash.gd" id="1_ycovr"]
+[ext_resource type="PackedScene" uid="uid://ccqa2tkyultx3" path="res://Particles/SplashParticles.tscn" id="2_612ln"]
+[ext_resource type="Texture2D" uid="uid://bdij8m8f3lyb0" path="res://assets/Butterklotz_Expl.png" id="3_612ln"]
+[ext_resource type="Texture2D" uid="uid://javmhnr67yij" path="res://assets/Butterblock smash.png" id="3_qsnie"]
+
+[node name="SplashObject" type="Node3D" unique_id=1632475484 node_paths=PackedStringArray("_sprite")]
+script = ExtResource("1_ycovr")
+_particles = ExtResource("2_612ln")
+_sprite = NodePath("Sprite3D")
+_frame0 = ExtResource("3_qsnie")
+_frame1 = ExtResource("3_612ln")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2100318538]
+transform = Transform3D(0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0)
+texture = ExtResource("3_qsnie")
