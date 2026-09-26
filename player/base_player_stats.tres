@@ -1,10 +1,6 @@
-[gd_resource type="Resource" script_class="PlayerStats" format=3]
+[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://caie54g0eb031"]
 
 [ext_resource type="Script" uid="uid://cuk6agrecftvp" path="res://player/player_stats.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
-health = 100.0
-walk_speed = 5.0
-sprint_speed = 10.0
-damage = 10.0

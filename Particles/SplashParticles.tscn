@@ -17,7 +17,9 @@ size = Vector2(0.1, 0.1)
 
 [node name="SplashParticles" type="GPUParticles3D" unique_id=696846188]
 material_override = ExtResource("1_6ln8e")
+emitting = false
 amount = 6
+one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_av480")
 draw_pass_1 = SubResource("QuadMesh_6ln8e")
