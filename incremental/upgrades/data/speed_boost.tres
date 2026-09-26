@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1")
 id = "speed_boost"
-display_name = "Bein Länge"
+display_name = "Beine"
 description = "so schnell wie der Wind"
-cost = 40
+cost = 5
 max_level = 5
 cost_growth = 1.2
 stat_key = "walk_speed"

@@ -15,7 +15,6 @@ signal died
 @export var speed_transition = 6.0
 @export var bobbing_amplitude = 0.02
 @export var bobbing_frequency = 10.0
-@export var shot_cooldown:float = 1.0
 @export var projectile: PackedScene
 
 var stats: PlayerStats
@@ -25,7 +24,8 @@ var bobbing_time = 0.0
 var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
 var speed = 0.0
-var shoot_timer = shot_cooldown
+var shoot_timer = 0.0
+var shot_cooldown = 1.0
 
 @onready var camera = $Camera3D
 var initial_camera_y = 0.0
@@ -35,6 +35,8 @@ func _ready():
 	stats = UpgradeManager.get_effective_stats(base_stats)
 	current_health = stats.health
 	speed = stats.walk_speed
+	shoot_timer = 1 /  stats.attack_speed
+	shot_cooldown = 1 /  stats.attack_speed
 	health_changed.emit(current_health, stats.health)
 
 func take_damage(amount: float) -> void:
