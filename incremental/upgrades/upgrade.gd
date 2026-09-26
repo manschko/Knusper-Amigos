@@ -14,3 +14,5 @@ class_name Upgrade
 
 func get_cost(current_level: int) -> int:
 	return int(cost * pow(cost_growth, current_level))
+	
+	

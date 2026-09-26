@@ -33,6 +33,7 @@ text = "1000"
 script = ExtResource("1_idtuo")
 
 [node name="UpgradeDebug" type="Control" parent="." unique_id=345857655]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0

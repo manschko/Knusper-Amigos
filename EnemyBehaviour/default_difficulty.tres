@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyDifficulty" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://EnemyBehaviour/enemy_difficulty.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+health_growth = 0.25
+damage_growth = 0.1
+speed_growth = 0.05
+attack_speed_growth = 0.05
+value_growth = 0.1
+max_multiplier = 0.0

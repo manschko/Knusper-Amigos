@@ -1,6 +1,7 @@
 extends Node
 
 const SAVE_PATH := "user://upgrades_save.json"
+const ENEMY_STAT_PREFIX := "enemy_"
 
 signal upgrade_purchased(id: String, new_level: int)
 signal upgrade_failed(id: String, reason: String)
@@ -75,12 +76,27 @@ func get_effective_stats(base: PlayerStats) -> PlayerStats:
 	if base == null:
 		push_warning("UpgradeManager: get_effective_stats() called with no base PlayerStats, using defaults")
 		base = PlayerStats.new()
-	var effective: PlayerStats = base.duplicate()
+	return _apply_stat_bonuses(base.duplicate(), "")
+
+
+## Enemy stats are targeted by upgrades with stat_key = "enemy_<property>".
+func get_effective_enemy_stats(base: EnemyStats) -> EnemyStats:
+	if base == null:
+		push_warning("UpgradeManager: get_effective_enemy_stats() called with no base EnemyStats, using defaults")
+		base = EnemyStats.new()
+	return _apply_stat_bonuses(base.duplicate(), ENEMY_STAT_PREFIX)
+
+
+func _apply_stat_bonuses(effective: Resource, prefix: String) -> Resource:
 	for property in effective.get_property_list():
 		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
-			var bonus := get_bonus_for_stat(property.name)
-			if bonus != 0.0:
-				effective.set(property.name, effective.get(property.name) + bonus)
+			var bonus := get_bonus_for_stat(prefix + property.name)
+			if bonus == 0.0:
+				continue
+			var new_value = effective.get(property.name) + bonus
+			if property.type == TYPE_INT:
+				new_value = int(round(new_value))
+			effective.set(property.name, new_value)
 	return effective
 
 
