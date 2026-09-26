@@ -1,4 +1,5 @@
 extends  CharacterBody3D
+class_name EnemyBahaviour
 
 @export var _player : Player;
 @export var _speed : float = 0.2;
@@ -14,7 +15,7 @@ var _dead : bool = false;
 
 var _attackTimer : float = 0;
 @onready var _sprite = $Sprite3D;
-var _onDeathSignal : Signal;
+signal _onDeathSignal(value: int)
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 

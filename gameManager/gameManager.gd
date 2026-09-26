@@ -1,0 +1,59 @@
+extends Node3D
+
+@export var playerScene: PackedScene
+@export var enemy: PackedScene
+@export_file("*.tscn") var upgradeScene: String
+
+
+var player: Player
+# Called when the node enters the scene tree for the first time.
+var timer: float = 1.0
+
+
+func _ready():
+	spawn_player()
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	spawn_enemy(delta)
+	
+	
+	
+func spawn_player() -> void:
+	player = playerScene.instantiate()
+	player.position = Vector3(0,2,0)
+	player.died.connect(func(): get_tree().change_scene_to_file(upgradeScene))
+	get_tree().current_scene.add_child.call_deferred(player)
+
+	
+func on_enemy_death(value) -> void:
+	Stats.add_crumbs(value)
+	
+func spawn_enemy(delta: float) -> void:
+	
+	
+	timer -= delta
+	if timer >= 0.0: 
+		return
+		
+	timer = randi_range(1, 10)
+	if not enemy:
+		print("no Enemy")
+		return
+	
+	
+	var z = player.position.z
+	var x = player.position.x
+	var winkel = randf_range(0.0, TAU)
+	var radius = randf_range(5, 25)
+	var dx = x + cos(winkel) * radius
+	var dz = z + sin(winkel) * radius
+	var spawn_position = Vector3(
+	dx,
+	player.position.y,
+	dz)
+	var neuer_enemy: EnemyBahaviour = enemy.instantiate()
+	neuer_enemy._player = player
+	neuer_enemy._onDeathSignal.connect(on_enemy_death)
+	get_tree().current_scene.add_child(neuer_enemy)
+
+	neuer_enemy.global_position = spawn_position
