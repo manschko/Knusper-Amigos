@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dhgnsuoljmm1m"]
+
+[ext_resource type="Texture2D" uid="uid://inakw126ju84" path="res://assets/ButterDrop.png" id="1_rv66f"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_rv66f")
