@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dyfudaxl7cmwx" path="res://ui/pause/pause_menu.gd" id="1_w42b2"]
 [ext_resource type="Theme" uid="uid://b0vja5wtseub3" path="res://ui/UI_theme.tres" id="2_k8vbq"]
+[ext_resource type="PackedScene" uid="uid://cl0vl037l6o4k" path="res://ui/settings/settings_menu.tscn" id="2_ukcsy"]
 
 [node name="pauseMenu" type="PanelContainer" unique_id=428125992]
 process_mode = 3
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w42b2")
+settingsScene = ExtResource("2_ukcsy")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1015153494]
 layout_mode = 2

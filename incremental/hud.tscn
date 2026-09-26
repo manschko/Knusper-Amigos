@@ -71,8 +71,6 @@ text = "Speed Lv 0"
 layout_mode = 2
 text = "Buy Speed"
 
-[node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
-
 [node name="healthBar" type="ProgressBar" parent="." unique_id=1043917419]
 offset_right = 286.0
 offset_bottom = 27.0
@@ -80,6 +78,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_mmu5l")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hgcak")
 value = 50.0
 script = ExtResource("4_pib85")
+
+[node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
 
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/add" to="crumbs" method="_on_add_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/remove" to="crumbs" method="_on_remove_pressed"]
