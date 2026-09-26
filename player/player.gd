@@ -33,6 +33,7 @@ var shoot_timer = 0.0
 var shot_cooldown = 1.0
 
 @onready var camera = $Camera3D
+@onready var hand = $CanvasLayer2/TextureRect
 var initial_camera_y = 0.0
 
 func _ready():
@@ -70,10 +71,13 @@ func handle_inputs(delta: float):
 		projectile.linear_velocity = direction * projectile_force + get_inherited_projectile_velocity(direction)
 		projectile.damage = stats.damage
 		get_parent().add_child(projectile)
+		hand.throw()
 		print("Shoot!")
 	
 	if shot_cooldown >= shoot_timer:
 		shoot_timer += delta
+	else:
+		hand.hold()
 
 # Only the player's forward/backward momentum along the shot direction is added;
 # sideways movement is ignored. Backward momentum is scaled by projectile_backward_inherit
