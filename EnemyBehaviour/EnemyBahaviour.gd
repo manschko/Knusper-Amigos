@@ -45,6 +45,6 @@ func _processAttack() -> void:
 		return;
 	
 	velocity = Vector3.ZERO;
-	_player.take_damage(_attackDamage, position);
+	_player.take_damage(_attackDamage);
 	_attackTimer = _attackCooldown;
 	_sprite.frame = 1;

@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var charatke: CharacterBody3D
+@export var charatke: Player
 @export var enemy: PackedScene
 # Called when the node enters the scene tree for the first time.
 var timer = 1.0
@@ -28,6 +28,7 @@ func spawn() -> void:
 	charatke.position.y,
 	dz)
 	var neuer_enemy = enemy.instantiate()
+	neuer_enemy._player = charatke
 	get_tree().current_scene.add_child(neuer_enemy)
 
 	neuer_enemy.global_position = spawn_position
