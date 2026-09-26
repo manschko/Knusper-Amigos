@@ -9,4 +9,5 @@ display_name = "Fett"
 description = "Ein guter Polster für schlechte Zeiten"
 cost = 5
 stat_key = "health"
+value_per_level = 25.0
 metadata/_custom_type_script = "uid://bl4sfou7r64hu"
