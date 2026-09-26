@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bxc3daqu8xqxc"]
+
+[ext_resource type="PackedScene" uid="uid://c3tf560egbc8g" path="res://player/player.tscn" id="1_sli15"]
+[ext_resource type="Texture2D" uid="uid://bdqbett1y1l06" path="res://prototype/kenney_prototype-textures/PNG/Dark/texture_09.png" id="2_juh5n"]
+[ext_resource type="PackedScene" path="res://enemy_sparne/en_spaw.tscn" id="3_iiv7d"]
+[ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="4_6ecbu"]
+[ext_resource type="PackedScene" path="res://enemy_sparne/ENEMY.tscn" id="5_lpdl1"]
+
+[sub_resource type="Environment" id="Environment_n74t5"]
+background_mode = 1
+background_color = Color(0.722687, 0.815274, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5f3fc"]
+albedo_texture = ExtResource("2_juh5n")
+uv1_scale = Vector3(100, 100, 100)
+
+[node name="TestFiield" type="Node3D" unique_id=237595271]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1457598361]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16095, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D" unique_id=1786488110]
+environment = SubResource("Environment_n74t5")
+
+[node name="Player" parent="." unique_id=803607447 instance=ExtResource("1_sli15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.14018, 0)
+jump_cut_multiplier = 0.4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1616090276]
+transform = Transform3D(300, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_5f3fc")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1224313295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53839, 1, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_5f3fc")
+
+[node name="EnSpaw" parent="." unique_id=560973131 node_paths=PackedStringArray("charatke") instance=ExtResource("3_iiv7d")]
+charatke = NodePath("../Player")
+enemy = ExtResource("4_6ecbu")
+
+[node name="Enemy" parent="." unique_id=2017438825 instance=ExtResource("5_lpdl1")]

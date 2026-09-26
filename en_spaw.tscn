@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bjtugv7aibjem"]
+
+[ext_resource type="Script" path="res://enemy_sparne/en_spaw.gd" id="1_yfeo4"]
+
+[node name="EnSpaw" type="Node3D" unique_id=560973131]
+script = ExtResource("1_yfeo4")

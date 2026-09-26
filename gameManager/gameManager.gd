@@ -3,6 +3,12 @@ extends Node3D
 @export var playerScene: PackedScene
 @export var enemy: PackedScene
 @export_file("*.tscn") var upgradeScene: String
+var enemy_count = 0
+var enemy_death = 0
+var total_enemy = 50
+var enemys_spawned = 0
+var wave_bonus = 0.5
+var wave_timer = 0.0
 
 
 var player: Player
@@ -14,6 +20,14 @@ func _ready():
 	spawn_player()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	wave_timer += delta
+	if wave_timer <= 45.0: 
+		enemy_count = 0
+		enemy_death = 0
+		total_enemy += total_enemy * wave_bonus
+		enemys_spawned = 0
+		wave_timer = 0.0
+		
 	spawn_enemy(delta)
 	
 	
@@ -26,6 +40,7 @@ func spawn_player() -> void:
 
 	
 func on_enemy_death(value) -> void:
+	enemy_count -= 1
 	Stats.add_crumbs(value)
 	
 func spawn_enemy(delta: float) -> void:
@@ -40,7 +55,25 @@ func spawn_enemy(delta: float) -> void:
 		print("no Enemy")
 		return
 	
-	
+	if enemy_count < 5 :
+		while (enemys_spawned != total_enemy && enemy_count < 5):
+			var neuer_enemy: EnemyBahaviour = enemy.instantiate()
+			neuer_enemy._player = player
+			neuer_enemy._onDeathSignal.connect(on_enemy_death)
+			get_tree().current_scene.add_child(neuer_enemy)
+			neuer_enemy.global_position = set_pos()
+			enemy_count += 1
+			enemys_spawned += 1
+	elif not enemys_spawned == total_enemy:
+		var neuer_enemy: EnemyBahaviour = enemy.instantiate()
+		neuer_enemy._player = player
+		neuer_enemy._onDeathSignal.connect(on_enemy_death)
+		get_tree().current_scene.add_child(neuer_enemy)
+		neuer_enemy.global_position = set_pos()
+		enemy_count += 1
+		enemys_spawned += 1
+
+func set_pos():
 	var z = player.position.z
 	var x = player.position.x
 	var winkel = randf_range(0.0, TAU)
@@ -51,9 +84,4 @@ func spawn_enemy(delta: float) -> void:
 	dx,
 	player.position.y,
 	dz)
-	var neuer_enemy: EnemyBahaviour = enemy.instantiate()
-	neuer_enemy._player = player
-	neuer_enemy._onDeathSignal.connect(on_enemy_death)
-	get_tree().current_scene.add_child(neuer_enemy)
-
-	neuer_enemy.global_position = spawn_position
+	return spawn_position
