@@ -1,4 +1,3 @@
-@tool
 extends Node
 ## Custom handlers for settings that require special logic
 

@@ -3,42 +3,24 @@
 [ext_resource type="Script" uid="uid://jib21ch5ked3" path="res://incremental/crumbs.gd" id="1_idtuo"]
 [ext_resource type="Script" uid="uid://ddimryknjvml3" path="res://incremental/upgrades/upgrade_debug_hud.gd" id="2_updbg"]
 [ext_resource type="PackedScene" uid="uid://eynwht55e534" path="res://ui/pause/pause_menu.tscn" id="3_sab5r"]
+[ext_resource type="Script" uid="uid://co4nxo5v0uhyk" path="res://incremental/health_bar.gd" id="4_pib85"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmu5l"]
+bg_color = Color(0.98454016, 0.75541365, 0.41698027, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4012587, 0.26998115, 0.06644129, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgcak"]
+bg_color = Color(0.96340114, 0.37866557, 0.381398, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=763744515]
-
-[node name="Crumbs" type="Control" parent="." unique_id=94324981]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="remove" type="Button" parent="Crumbs" unique_id=110232051]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.09200001
-anchor_top = 0.102000006
-anchor_right = 0.09200001
-anchor_bottom = 0.102000006
-offset_left = 478.016
-offset_top = 168.90399
-offset_right = 545.016
-offset_bottom = 199.90399
-text = "remove"
-
-[node name="add" type="Button" parent="Crumbs" unique_id=540985495]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.09200001
-anchor_top = 0.102000006
-anchor_right = 0.09200001
-anchor_bottom = 0.102000006
-offset_left = 276.016
-offset_top = 154.90399
-offset_right = 315.016
-offset_bottom = 185.90399
-text = "Add"
 
 [node name="crumbs" type="RichTextLabel" parent="." unique_id=508328940]
 anchors_preset = 1
@@ -51,6 +33,7 @@ text = "1000"
 script = ExtResource("1_idtuo")
 
 [node name="UpgradeDebug" type="Control" parent="." unique_id=345857655]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
@@ -63,6 +46,14 @@ script = ExtResource("2_updbg")
 layout_mode = 1
 offset_right = 300.0
 offset_bottom = 120.0
+
+[node name="add" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=540985495]
+layout_mode = 2
+text = "Add 50 crumbs"
+
+[node name="remove" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=110232051]
+layout_mode = 2
+text = "remove 50 crumbs"
 
 [node name="DamageLabel" type="Label" parent="UpgradeDebug/VBoxContainer" unique_id=1024158836]
 layout_mode = 2
@@ -82,7 +73,15 @@ text = "Buy Speed"
 
 [node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
 
-[connection signal="pressed" from="Crumbs/remove" to="crumbs" method="_on_remove_pressed"]
-[connection signal="pressed" from="Crumbs/add" to="crumbs" method="_on_add_pressed"]
+[node name="healthBar" type="ProgressBar" parent="." unique_id=1043917419]
+offset_right = 286.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mmu5l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hgcak")
+value = 50.0
+script = ExtResource("4_pib85")
+
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/add" to="crumbs" method="_on_add_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/remove" to="crumbs" method="_on_remove_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuyDamage" to="UpgradeDebug" method="_on_buy_damage_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuySpeed" to="UpgradeDebug" method="_on_buy_speed_pressed"]

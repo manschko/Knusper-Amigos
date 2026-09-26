@@ -1,5 +1,6 @@
 # The script is attached to a CharacterBody3D node.
 extends CharacterBody3D
+class_name Player
 
 signal health_changed(current: float, max_health: float)
 signal died

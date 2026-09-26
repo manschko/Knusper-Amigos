@@ -24,4 +24,3 @@ script = ExtResource("2_am31l")
 mesh = SubResource("CapsuleMesh_fsq37")
 
 [node name="CanvasLayer" parent="." unique_id=763744515 instance=ExtResource("3_rf0yd")]
-visible = false
