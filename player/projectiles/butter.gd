@@ -1,33 +1,31 @@
 extends RigidBody3D
 
-# Calibration points found by testing in the editor: the sprite's
-# rotation_degrees.z doesn't map 1:1 to the flight angle, but it is close
-# enough to linear between these two known points.
-# Flight angle 45° (up)  -> sprite z rotation 0°
-# Flight angle -45° (down) -> sprite z rotation 70°
+
 const ANGLE_UP_DEG := 45.0
 const ANGLE_DOWN_DEG := -45.0
-const Z_ROT_UP_DEG := 0.0
-const Z_ROT_DOWN_DEG := 70.0
+const Z_ROT_UP_DEG := -45.0
+const Z_ROT_DOWN_DEG := 40.0
+var damage = 1
 
-@onready var sprite: Sprite3D = $Sprite3D
+@onready var sprite: Sprite3D = $CollisionShape3D/Sprite3D
 
 func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
+	face_the_camera()
+
+
+func face_the_camera():
 	var camera := get_viewport().get_camera_3d()
 	if camera == null:
 		return
-
-	# The whole body (and its CollisionShape3D child) faces the camera
-	# horizontally, same as a Y-locked billboard would.
-	var target := camera.global_position
-	target.y = global_position.y
-	if target.distance_to(global_position) > 0.001:
-		look_at(target, Vector3.UP)
-
-	# The sprite then tilts locally on top of that to reflect the flight direction.
+	# Sprite3D's front face renders toward local +Z, but look_at() points -Z
+	# at the target, so we look at the point mirrored away from the camera
+	# instead -- that way +Z (the front) ends up facing the camera.
+	var mirrored_target := 2.0 * sprite.global_position - camera.global_transform.origin
+	sprite.look_at(mirrored_target, Vector3.UP)
+	
 	var velocity := linear_velocity
 	if velocity.length() <= 0.1:
 		return
@@ -38,3 +36,10 @@ func _process(_delta: float) -> void:
 	var t := inverse_lerp(ANGLE_UP_DEG, ANGLE_DOWN_DEG, angle_deg)
 	t = clampf(t, 0.0, 1.0)
 	sprite.rotation_degrees.z = lerp(Z_ROT_UP_DEG, Z_ROT_DOWN_DEG, t)
+	
+
+
+func _on_body_entered(body: Node) -> void:
+	if body is EnemyBahaviour:
+		body.take_damage(damage)
+	queue_free() # destroy projectile

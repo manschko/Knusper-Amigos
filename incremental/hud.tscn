@@ -33,7 +33,6 @@ text = "1000"
 script = ExtResource("1_idtuo")
 
 [node name="UpgradeDebug" type="Control" parent="." unique_id=345857655]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
@@ -71,6 +70,10 @@ text = "Speed Lv 0"
 layout_mode = 2
 text = "Buy Speed"
 
+[node name="health" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=162239947]
+layout_mode = 2
+text = "remove health"
+
 [node name="healthBar" type="ProgressBar" parent="." unique_id=1043917419]
 offset_right = 286.0
 offset_bottom = 27.0
@@ -85,3 +88,4 @@ script = ExtResource("4_pib85")
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/remove" to="crumbs" method="_on_remove_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuyDamage" to="UpgradeDebug" method="_on_buy_damage_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuySpeed" to="UpgradeDebug" method="_on_buy_speed_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/health" to="healthBar" method="_on_health_pressed"]

@@ -1,18 +1,23 @@
 [gd_scene format=3 uid="uid://kejqyvhe8sxh"]
 
 [ext_resource type="Script" uid="uid://dekh1r2fh3ya7" path="res://player/projectiles/butter.gd" id="1_dsh0q"]
-[ext_resource type="Texture2D" uid="uid://becjrvs1b8epv" path="res://assets/butter.png" id="2_drxui"]
+[ext_resource type="Texture2D" uid="uid://btt80ccyyjfnj" path="res://assets/Butterblock Werfen.png" id="2_drxui"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mmu5l"]
-size = Vector3(1, 0.2, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_drxui"]
+radius = 0.3
 
 [node name="Butter" type="RigidBody3D" unique_id=1667415981]
 collision_layer = 4
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_dsh0q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2086534568]
-shape = SubResource("BoxShape3D_mmu5l")
+shape = SubResource("SphereShape3D_drxui")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1064221733]
+[node name="Sprite3D" type="Sprite3D" parent="CollisionShape3D" unique_id=1064221733]
+transform = Transform3D(0.038302224, 0.03213938, 0, -0.03213938, 0.038302224, 0, 0, 0, 0.05, 0, 0, 0)
 flip_h = true
 texture = ExtResource("2_drxui")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
