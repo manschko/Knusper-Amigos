@@ -58,5 +58,7 @@ func take_damage(damage: float) -> void:
 	if _health > 0: return;
 	
 	_onDeathSignal.emit(_value);
-	queue_free()
+	
+	_sprite.frame = 2;
+	#queue_free()
 	

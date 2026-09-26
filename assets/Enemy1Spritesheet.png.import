@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bufnc4tq70a43"
-path.s3tc="res://.godot/imported/Enemy1Spritesheet.png-eb322e470c9ccb402b5d54dfc8715c39.s3tc.ctex"
+uid="uid://dw00pfdp206bw"
+path.s3tc="res://.godot/imported/Enemy1Spritesheet.png-6073a3a7175031c69357c2b3b894f785.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://utils/Enemy1Spritesheet.png"
-dest_files=["res://.godot/imported/Enemy1Spritesheet.png-eb322e470c9ccb402b5d54dfc8715c39.s3tc.ctex"]
+source_file="res://assets/Enemy1Spritesheet.png"
+dest_files=["res://.godot/imported/Enemy1Spritesheet.png-6073a3a7175031c69357c2b3b894f785.s3tc.ctex"]
 
 [params]
 
