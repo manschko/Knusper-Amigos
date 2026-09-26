@@ -2,18 +2,21 @@ extends Node3D
 
 @export var playerScene: PackedScene
 @export var enemy: PackedScene
+@export var difficulty: EnemyDifficulty = preload("res://EnemyBehaviour/default_difficulty.tres")
 @export_file("*.tscn") var upgradeScene: String
 
 
 var player: Player
 # Called when the node enters the scene tree for the first time.
 var timer: float = 1.0
+var elapsed_time: float = 0.0
 
 
 func _ready():
 	spawn_player()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	elapsed_time += delta
 	spawn_enemy(delta)
 	
 	
@@ -53,6 +56,10 @@ func spawn_enemy(delta: float) -> void:
 	dz)
 	var neuer_enemy: EnemyBahaviour = enemy.instantiate()
 	neuer_enemy._player = player
+	var enemy_stats: EnemyStats = UpgradeManager.get_effective_enemy_stats(neuer_enemy.base_stats)
+	if difficulty:
+		enemy_stats = difficulty.apply(enemy_stats, elapsed_time)
+	neuer_enemy.stats = enemy_stats
 	neuer_enemy._onDeathSignal.connect(on_enemy_death)
 	get_tree().current_scene.add_child(neuer_enemy)
 
