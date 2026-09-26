@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cmqjlqrv3ww1m"]
+
+[ext_resource type="Texture2D" uid="uid://4bdd0omfvwrk" path="res://assets/Boden.jpg" id="1_8lgq4"]
+
+[resource]
+albedo_color = Color(0.8526649, 0.6789757, 0.44452, 1)
+albedo_texture = ExtResource("1_8lgq4")
+uv1_triplanar = true
