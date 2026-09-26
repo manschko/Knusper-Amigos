@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="EnemyDifficulty" format=3 uid="uid://beajb8so44o5r"]
+
+[ext_resource type="Script" uid="uid://5j6jh87wy2jm" path="res://EnemyBehaviour/enemy_difficulty.gd" id="1"]
+
+[resource]
+script = ExtResource("1")

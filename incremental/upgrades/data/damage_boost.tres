@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 id = "damage_boost"
-display_name = "A lot of DAMAGE"
+display_name = "Muskeln"
 description = "Damage ist besser als Schaden"
-cost = 50
+cost = 5
 stat_key = "damage"
 value_per_level = 2.0

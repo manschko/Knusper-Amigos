@@ -15,8 +15,12 @@ signal died
 @export var speed_transition = 6.0
 @export var bobbing_amplitude = 0.02
 @export var bobbing_frequency = 10.0
-@export var shot_cooldown:float = 1.0
 @export var projectile: PackedScene
+@export var projectile_force = 20.0
+## How much of the player's velocity is added to shots (1 = all of it).
+@export var projectile_inherit_factor = 1.0
+## How much backward momentum (moving away from the aim) slows shots (0 = none, 1 = all).
+@export_range(0.0, 1.0) var projectile_backward_inherit = 0.25
 
 var stats: PlayerStats
 var current_health: float
@@ -25,7 +29,8 @@ var bobbing_time = 0.0
 var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
 var speed = 0.0
-var shoot_timer = shot_cooldown
+var shoot_timer = 0.0
+var shot_cooldown = 1.0
 
 @onready var camera = $Camera3D
 var initial_camera_y = 0.0
@@ -35,6 +40,8 @@ func _ready():
 	stats = UpgradeManager.get_effective_stats(base_stats)
 	current_health = stats.health
 	speed = stats.walk_speed
+	shoot_timer = 1 /  stats.attack_speed
+	shot_cooldown = 1 /  stats.attack_speed
 	health_changed.emit(current_health, stats.health)
 
 func take_damage(amount: float) -> void:
@@ -57,20 +64,25 @@ func handle_inputs(delta: float):
 	if Input.is_action_just_pressed("shoot") and shot_cooldown <= shoot_timer:
 		shoot_timer = 0.0
 		var projectile = projectile.instantiate()
-		var force = 20
 		var direction = camera.global_basis * Vector3.FORWARD
-		# Spawn from the bottom-right of the camera (like a hip-fired
-		# weapon) instead of dead center, while still firing toward
-		# where the camera is looking.
 		var muzzle_offset = Vector3(0.5, -0.3, -0.5)
 		projectile.position = camera.global_transform * muzzle_offset
-		projectile.linear_velocity = direction * force
+		projectile.linear_velocity = direction * projectile_force + get_inherited_projectile_velocity(direction)
 		projectile.damage = stats.damage
 		get_parent().add_child(projectile)
 		print("Shoot!")
 	
 	if shot_cooldown >= shoot_timer:
 		shoot_timer += delta
+
+# Only the player's forward/backward momentum along the shot direction is added;
+# sideways movement is ignored. Backward momentum is scaled by projectile_backward_inherit
+# so moving backwards doesn't stall the projectile.
+func get_inherited_projectile_velocity(direction: Vector3) -> Vector3:
+	var along = velocity.dot(direction) * projectile_inherit_factor
+	if along < 0.0:
+		along *= projectile_backward_inherit
+	return direction * along
 # This function is called every physics frame, which is ideal for
 # handling physics-based movement
 func _physics_process(delta):
@@ -131,7 +143,7 @@ func handle_movement(delta):
 	
 	Input.is_action_just_pressed("sprint")
 	if Input.is_action_pressed("sprint"):
-		speed = lerp(speed, stats.sprint_speed, delta)
+		speed = lerp(speed, speed * stats.sprint_multi, delta)
 	else:
 		speed = lerp(speed, stats.walk_speed, delta)
 

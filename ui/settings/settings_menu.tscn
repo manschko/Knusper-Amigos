@@ -15,18 +15,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v136q")
 
-[node name="TabContainer" type="TabContainer" parent="." unique_id=2020566245]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1776351296]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=2020566245]
+layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_fr2hu")
 current_tab = 2
 
-[node name="Sound" type="MarginContainer" parent="TabContainer" unique_id=1741372608]
+[node name="Sound" type="MarginContainer" parent="MarginContainer/TabContainer" unique_id=1741372608]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 16
@@ -35,26 +42,26 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 metadata/_tab_index = 0
 
-[node name="Sound" type="VBoxContainer" parent="TabContainer/Sound" unique_id=66979906]
+[node name="Sound" type="VBoxContainer" parent="MarginContainer/TabContainer/Sound" unique_id=66979906]
 layout_mode = 2
 theme_override_constants/separation = 11
 
-[node name="Music" parent="TabContainer/Sound/Sound" unique_id=784140164 instance=ExtResource("3_fr2hu")]
+[node name="Music" parent="MarginContainer/TabContainer/Sound/Sound" unique_id=784140164 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 setting_title = "Music"
 setting_key = "Music"
 
-[node name="SFX" parent="TabContainer/Sound/Sound" unique_id=1608783647 instance=ExtResource("3_fr2hu")]
+[node name="SFX" parent="MarginContainer/TabContainer/Sound/Sound" unique_id=1608783647 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 setting_title = "SFX"
 setting_key = "SFX"
 
-[node name="Master" parent="TabContainer/Sound/Sound" unique_id=435059889 instance=ExtResource("3_fr2hu")]
+[node name="Master" parent="MarginContainer/TabContainer/Sound/Sound" unique_id=435059889 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 setting_title = "Master"
 setting_key = "Master"
 
-[node name="Control" type="MarginContainer" parent="TabContainer" unique_id=1247335686]
+[node name="Control" type="MarginContainer" parent="MarginContainer/TabContainer" unique_id=1247335686]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 16
@@ -63,28 +70,28 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 metadata/_tab_index = 1
 
-[node name="Control" type="VBoxContainer" parent="TabContainer/Control" unique_id=-1284967295]
+[node name="Control" type="VBoxContainer" parent="MarginContainer/TabContainer/Control" unique_id=-1284967295]
 layout_mode = 2
 theme_override_constants/separation = 11
 
-[node name="MouseSensitivity" parent="TabContainer/Control/Control" unique_id=-1284967294 instance=ExtResource("3_fr2hu")]
+[node name="MouseSensitivity" parent="MarginContainer/TabContainer/Control/Control" unique_id=-1284967294 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 min_val = 1.0
 setting_title = "Mouse Sensitivity"
 setting_key = "mouse_sensitivity"
 
-[node name="InvertMouseY" parent="TabContainer/Control/Control" unique_id=-1284967293 instance=ExtResource("4_toggle")]
+[node name="InvertMouseY" parent="MarginContainer/TabContainer/Control/Control" unique_id=-1284967293 instance=ExtResource("4_toggle")]
 layout_mode = 2
 setting_title = "Invert Mouse Y"
 setting_key = "invert_mouse_y"
 
-[node name="GamepadVibration" parent="TabContainer/Control/Control" unique_id=-1284967292 instance=ExtResource("4_toggle")]
+[node name="GamepadVibration" parent="MarginContainer/TabContainer/Control/Control" unique_id=-1284967292 instance=ExtResource("4_toggle")]
 layout_mode = 2
 start_val = true
 setting_title = "Gamepad Vibration"
 setting_key = "gamepad_vibration"
 
-[node name="Graphics" type="MarginContainer" parent="TabContainer" unique_id=839159439]
+[node name="Graphics" type="MarginContainer" parent="MarginContainer/TabContainer" unique_id=839159439]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -92,44 +99,42 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 metadata/_tab_index = 2
 
-[node name="Graphics" type="VBoxContainer" parent="TabContainer/Graphics" unique_id=-1274967295]
+[node name="Graphics" type="VBoxContainer" parent="MarginContainer/TabContainer/Graphics" unique_id=-1274967295]
 layout_mode = 2
 theme_override_constants/separation = 11
 
-[node name="Fullscreen" parent="TabContainer/Graphics/Graphics" unique_id=-1274967294 instance=ExtResource("5_select")]
+[node name="Fullscreen" parent="MarginContainer/TabContainer/Graphics/Graphics" unique_id=-1274967294 instance=ExtResource("5_select")]
 layout_mode = 2
 values = Array[String](["Windowed", "Fullscreen", "Borderless"])
 start_val = "Windowed"
 setting_title = "Fullscreen"
 setting_key = "fullscreen"
 
-[node name="Resolution" parent="TabContainer/Graphics/Graphics" unique_id=-1274967293 instance=ExtResource("5_select")]
+[node name="Resolution" parent="MarginContainer/TabContainer/Graphics/Graphics" unique_id=-1274967293 instance=ExtResource("5_select")]
 layout_mode = 2
 values = Array[String](["1280x720", "1600x900", "1920x1080", "2560x1440"])
 start_val = "1920x1080"
 setting_title = "Resolution"
 setting_key = "resolution"
 
-[node name="FrameRateLimit" parent="TabContainer/Graphics/Graphics" unique_id=-1274967292 instance=ExtResource("5_select")]
+[node name="FrameRateLimit" parent="MarginContainer/TabContainer/Graphics/Graphics" unique_id=-1274967292 instance=ExtResource("5_select")]
 layout_mode = 2
 values = Array[String](["30", "60", "120", "unlimited"])
 start_val = "60"
 setting_title = "Frame Rate Limit"
 setting_key = "frame_rate_limit"
 
-[node name="VSync" parent="TabContainer/Graphics/Graphics" unique_id=-1274967291 instance=ExtResource("4_toggle")]
+[node name="VSync" parent="MarginContainer/TabContainer/Graphics/Graphics" unique_id=-1274967291 instance=ExtResource("4_toggle")]
 layout_mode = 2
 start_val = true
 setting_title = "VSync"
 setting_key = "vsync"
 
-[node name="CloseButton" type="Button" parent="." unique_id=1044645706]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -32.0
-offset_bottom = 32.0
-grow_horizontal = 0
+[node name="CloseButton" type="Button" parent="MarginContainer" unique_id=1044645706]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource("2_fr2hu")
-text = "X"
+text = "  X  "
+
+[connection signal="pressed" from="MarginContainer/CloseButton" to="." method="_on_close_button_pressed"]

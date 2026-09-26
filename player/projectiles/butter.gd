@@ -9,6 +9,8 @@ var damage = 1
 
 @onready var sprite: Sprite3D = $CollisionShape3D/Sprite3D
 
+@export var splashObject : PackedScene;
+
 func _ready() -> void:
 	pass
 
@@ -41,5 +43,8 @@ func face_the_camera():
 
 func _on_body_entered(body: Node) -> void:
 	if body is EnemyBahaviour:
-		body.take_damage(damage)
+		body.take_damage(damage);
+		var nSplash : Splash = splashObject.instantiate();
+		get_tree().current_scene.add_child(nSplash);
+		nSplash.position = position;
 	queue_free() # destroy projectile

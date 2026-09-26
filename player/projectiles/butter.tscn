@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://kejqyvhe8sxh"]
 
 [ext_resource type="Script" uid="uid://dekh1r2fh3ya7" path="res://player/projectiles/butter.gd" id="1_dsh0q"]
+[ext_resource type="PackedScene" uid="uid://djngex0pr3fif" path="res://Particles/SplashObject.tscn" id="2_bji6s"]
 [ext_resource type="Texture2D" uid="uid://btt80ccyyjfnj" path="res://assets/Butterblock Werfen.png" id="2_drxui"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_drxui"]
@@ -11,6 +12,7 @@ collision_layer = 4
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_dsh0q")
+splashObject = ExtResource("2_bji6s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2086534568]
 shape = SubResource("SphereShape3D_drxui")

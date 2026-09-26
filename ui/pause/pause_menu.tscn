@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://eynwht55e534"]
 
 [ext_resource type="Script" uid="uid://dyfudaxl7cmwx" path="res://ui/pause/pause_menu.gd" id="1_w42b2"]
-[ext_resource type="Theme" uid="uid://b0vja5wtseub3" path="res://ui/UI_theme.tres" id="2_k8vbq"]
 [ext_resource type="PackedScene" uid="uid://cl0vl037l6o4k" path="res://ui/settings/settings_menu.tscn" id="2_ukcsy"]
+[ext_resource type="Theme" uid="uid://xgbdxwjpqqyd" path="res://ui/UI_theme_cookies.tres" id="3_ukcsy"]
 
 [node name="pauseMenu" type="PanelContainer" unique_id=428125992]
 process_mode = 3
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,19 +19,22 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1156589212]
 layout_mode = 2
-theme = ExtResource("2_k8vbq")
+theme = ExtResource("3_ukcsy")
 theme_override_constants/separation = 8
 
 [node name="continue" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1480732389]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Continue"
 
 [node name="settings" type="Button" parent="CenterContainer/VBoxContainer" unique_id=987566041]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Settings"
 
 [node name="quit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=82270660]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Quit the run"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/continue" to="." method="_on_continue_pressed"]

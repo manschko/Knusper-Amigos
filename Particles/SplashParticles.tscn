@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ccqa2tkyultx3"]
+
+[ext_resource type="Material" uid="uid://dhgnsuoljmm1m" path="res://Particles/Splash.tres" id="1_6ln8e"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_av480"]
+use_rotation_3d = true
+rotation_3d_min = Vector3(0, 0, -90)
+rotation_3d_max = Vector3(0, 0, 90)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+scale_min = 2.0
+scale_max = 4.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_6ln8e"]
+size = Vector2(0.1, 0.1)
+
+[node name="SplashParticles" type="GPUParticles3D" unique_id=696846188]
+material_override = ExtResource("1_6ln8e")
+emitting = false
+amount = 6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_av480")
+draw_pass_1 = SubResource("QuadMesh_6ln8e")
