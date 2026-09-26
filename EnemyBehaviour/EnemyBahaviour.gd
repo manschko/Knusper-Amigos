@@ -8,6 +8,9 @@ extends  CharacterBody3D
 @export var _attackAnimationTime : float = 0.1;
 @export var _health : float = 100;
 @export var _value : int = 1;
+@export var _deathTimer : float = 2;
+
+var _dead : bool = false;
 
 var _attackTimer : float = 0;
 @onready var _sprite = $Sprite3D;
@@ -16,6 +19,12 @@ var _onDeathSignal : Signal;
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta: float) -> void:
+	
+	if _dead:
+		_deathTimer -= delta;
+		if _deathTimer <= 0:
+			queue_free();
+		return;
 	
 	var lookAtTarget = _player.position
 	lookAtTarget.y = position.y
@@ -60,5 +69,5 @@ func take_damage(damage: float) -> void:
 	_onDeathSignal.emit(_value);
 	
 	_sprite.frame = 2;
-	#queue_free()
+	_dead = true;
 	
