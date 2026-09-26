@@ -1,19 +1,24 @@
 [gd_scene format=3 uid="uid://bxlwlnu2h12d8"]
 
 [ext_resource type="Script" uid="uid://b2fw0krv5k4yd" path="res://EnemyBehaviour/EnemyBahaviour.gd" id="1_kwuay"]
+[ext_resource type="Texture2D" uid="uid://bufnc4tq70a43" path="res://utils/Enemy1Spritesheet.png" id="2_7f1kg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xtt4n"]
-size = Vector3(0.5, 1, 0.1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ae68y"]
+size = Vector3(1, 1.355, 0.1)
 
 [node name="Enemy" type="CharacterBody3D" unique_id=928747577]
 script = ExtResource("1_kwuay")
+_speed = 1.0
+_attackRange = 2.0
+_attackCooldown = 1.0
+_attackAnimationTime = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345111102]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67749023, 0)
 shape = SubResource("BoxShape3D_xtt4n")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=173893819]
-transform = Transform3D(0.25, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0.5, 0)
-mesh = SubResource("PlaneMesh_ae68y")
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=196595858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31936228, 0.60061914, 0)
+pixel_size = 0.001
+texture = ExtResource("2_7f1kg")
+hframes = 2
