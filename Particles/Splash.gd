@@ -15,22 +15,12 @@ var _frameTimer : float = 0;
 func _ready() -> void:
 	_frameTimer = _frameTime;
 	_sprite.texture = _frame0;
-	face_the_camera();
 	spawn_particles();
 
-func face_the_camera():
-	var camera := get_viewport().get_camera_3d()
-	if camera == null:
-		return
-	# Sprite3D's front face renders toward local +Z, but look_at() points -Z
-	# at the target, so we look at the point mirrored away from the camera
-	# instead -- that way +Z (the front) ends up facing the camera.
-	var mirrored_target := 2.0 * _sprite.global_position - camera.global_transform.origin
-	_sprite.look_at(mirrored_target, Vector3.UP)
 
 func spawn_particles():
 	var particles : GPUParticles3D = _particles.instantiate()
-	get_tree().current_scene.add_child(particles);
+	get_parent().add_child(particles);
 	particles.position = position;
 	particles.emitting = true;
 

@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://0iw0eddvawcl"]
 
+[ext_resource type="PackedScene" uid="uid://ccqa2tkyultx3" path="res://Particles/SplashParticles.tscn" id="1_1kil2"]
 [ext_resource type="PackedScene" uid="uid://c3tf560egbc8g" path="res://player/player.tscn" id="1_fwlvc"]
 [ext_resource type="PackedScene" uid="uid://bbpf4p6oafovi" path="res://gameManager/gameManager.tscn" id="1_hvuor"]
 [ext_resource type="Material" uid="uid://bjmyu7on8e5rc" path="res://Shader/Boden.tres" id="2_b67b1"]
 [ext_resource type="Texture2D" uid="uid://bdqbett1y1l06" path="res://prototype/kenney_prototype-textures/PNG/Dark/texture_09.png" id="3_13l85"]
 [ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="3_i2arf"]
-[ext_resource type="PackedScene" uid="uid://bg0bi2s6d6j0g" path="res://Shader/Border.tscn" id="5_fojsm"]
+[ext_resource type="PackedScene" uid="uid://bwxffyaxpjfd" path="res://Shader/Border.tscn" id="5_fojsm"]
 
 [sub_resource type="Environment" id="Environment_n74t5"]
 background_mode = 1
@@ -16,6 +17,9 @@ albedo_texture = ExtResource("3_13l85")
 uv1_scale = Vector3(100, 100, 100)
 
 [node name="GameField" type="Node3D" unique_id=237595271]
+
+[node name="SplashParticles" parent="." unique_id=696846188 instance=ExtResource("1_1kil2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7188215, 9.078801)
 
 [node name="GameManager" parent="." unique_id=560973131 instance=ExtResource("1_hvuor")]
 playerScene = ExtResource("1_fwlvc")
