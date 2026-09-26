@@ -1,16 +1,195 @@
-[gd_scene format=3 uid="uid://c3tf560egbc8g"]
+[gd_scene format=3 uid="uid://cf0dw4af5l6t5"]
 
-[ext_resource type="Script" uid="uid://eo5d7yel47id" path="res://player_controller/3d/player.gd" id="1_x2kuh"]
-[ext_resource type="Script" uid="uid://b3ma2mus12o8j" path="res://player_controller/3d/camera_3d.gd" id="2_am31l"]
 [ext_resource type="PackedScene" uid="uid://ix00v1whpwlb" path="res://incremental/hud.tscn" id="3_rf0yd"]
 [ext_resource type="Resource" path="res://incremental/upgrades/base_player_stats.tres" id="4_stats"]
 
+[sub_resource type="GDScript" id="GDScript_ebmhy"]
+script/source = "# The script is attached to a CharacterBody3D node.
+extends CharacterBody3D
+class_name Player
+
+signal health_changed(current: float, max_health: float)
+signal died
+
+@export var base_stats: PlayerStats
+
+# Movement feel tuning - not part of PlayerStats since these aren't upgraded.
+@export var jump_velocity = 4.5
+@export var coyote_time = 0.2
+@export var jump_buffer_time = 0.2
+@export var jump_cut_multiplier = 0.5
+@export var speed_transition = 6.0
+@export var bobbing_amplitude = 0.1
+@export var bobbing_frequency = 10.0
+
+var stats: PlayerStats
+var current_health: float
+
+var bobbing_time = 0.0
+var coyote_timer = 0.0
+var jump_buffer_timer = 0.0
+var speed = 0.0
+
+@onready var camera = $Camera3D
+var initial_camera_y = 0.0
+
+func _ready():
+	initial_camera_y = camera.position.y
+	stats = UpgradeManager.get_effective_stats(base_stats)
+	current_health = stats.health
+	speed = stats.walk_speed
+	health_changed.emit(current_health, stats.health)
+
+func take_damage(amount: float, originPosition : Vector3) -> void:
+	current_health = max(current_health - amount, 0.0)
+	health_changed.emit(current_health, stats.health)
+	if current_health <= 0.0:
+		died.emit()
+
+func heal(amount: float) -> void:
+	current_health = min(current_health + amount, stats.health)
+	health_changed.emit(current_health, stats.health)
+
+# Get the gravity from the project settings to ensure consistency.
+var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
+
+# This function is called every physics frame, which is ideal for
+# handling physics-based movement
+func _physics_process(delta):
+	
+	# Handle the jump input.
+	handle_jump(delta)
+	handle_movement(delta)
+
+	
+	
+	
+func handle_jump(delta):
+	
+	# Apply gravity. It's a continuous force applied to the y-velocity.
+	var current_gravity = gravity
+	if velocity.y > 0:  # Ascending
+		current_gravity = gravity * 1 - jump_cut_multiplier  # Reduce gravity
+	elif velocity.y < 0:  # Descending
+		current_gravity = gravity * 1 + jump_cut_multiplier  # Increase gravity
+	else:
+		current_gravity = gravity  # Default gravity
+		
+	if not is_on_floor():
+		velocity.y -= current_gravity * delta
+		coyote_timer -= delta
+	else:
+		coyote_timer = coyote_time
+		
+	# Jump buffer
+	if Input.is_action_just_pressed(\"jump\"):
+		jump_buffer_timer = jump_buffer_time
+	else:
+		jump_buffer_timer -= delta
+		
+	if jump_buffer_timer > 0 and (coyote_timer > 0 or is_on_floor()):
+		velocity.y = jump_velocity
+		coyote_timer = 0
+		jump_buffer_timer = 0
+
+
+#todo stops to abruply especially in the air
+func handle_movement(delta):
+	# Get the input direction from the actions defined in the Input Map.
+	# get_vector() returns a normalized Vector2 from the four actions,
+	# making it easy to handle WASD-like input.
+	var input_dir = Input.get_vector(\"moving_left\", \"moving_right\", \"moving_forward\", \"moving_backward\")
+	
+	# Calculate the 3D movement direction.
+	# `transform.basis` is used to convert the local input direction
+	# into a global direction relative to the character's rotation.
+	
+	var flat_basis = camera.transform.basis
+	flat_basis.y = Vector3.ZERO
+	flat_basis.z.y = 0
+	flat_basis.x.y = 0
+	flat_basis = flat_basis.orthonormalized()  # Ensure the basis remains orthonormal
+	var direction = (flat_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	Input.is_action_just_pressed(\"sprint\")
+	if Input.is_action_pressed(\"sprint\"):
+		speed = lerp(speed, stats.sprint_speed, delta * speed_transition)
+	else:
+		speed = lerp(speed, stats.walk_speed, delta * speed_transition)
+
+	# If there is movement input, set the horizontal velocity.
+	if direction:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+		bobbing_time += delta * bobbing_frequency
+		camera.position.y = initial_camera_y + bobbing_amplitude * sin(bobbing_time)
+	else:
+		# If there is no input, smoothly slow down the horizontal velocity.
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+		bobbing_time = 0.0  # Reset bobbing when not moving
+		camera.position.y = initial_camera_y
+
+
+	# Use `move_and_slide()` to apply the final calculated velocity.
+	# This function handles collision and sliding along surfaces.
+	move_and_slide()
+"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fsq37"]
+
+[sub_resource type="GDScript" id="GDScript_rf0yd"]
+script/source = "extends Camera3D
+
+@export var sensitivity = 0.2
+@export var max_pitch = 85.0
+@export var min_pitch = -85.0
+@export var invert_y = false
+
+var mouse_y_rotation = 0.0
+var mouse_x_rotation = 0.0
+
+func _ready():
+	# Lock the mouse when the game starts
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# Pick up any previously saved mouse settings right away.
+	# The \"mouse_sensitivity\" slider stores a 0-100 value; scale it so the
+	# slider's default of 50 matches this script's own default sensitivity.
+	sensitivity = SettingsManager.get_setting(\"mouse_sensitivity\", 50.0) * 0.004
+	invert_y = SettingsManager.get_setting(\"invert_mouse_y\", false)
+
+func set_mouse_sensitivity(percent: float) -> void:
+	sensitivity = percent * 0.004
+
+func set_invert_y(value: bool) -> void:
+	invert_y = value
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		# Rotate the parent node (horizontal rotation)
+		mouse_x_rotation -= event.relative.x * sensitivity
+		rotation.y = deg_to_rad(mouse_x_rotation)
+		
+		# Rotate the camera node (vertical rotation)
+		var y_dir = -1.0 if invert_y else 1.0
+		mouse_y_rotation -= event.relative.y * sensitivity * y_dir
+		mouse_y_rotation = clamp(mouse_y_rotation, min_pitch, max_pitch)
+		rotation.x = deg_to_rad(mouse_y_rotation)
+	
+	if event.is_action_pressed(\"ui_cancel\"): # Use a custom action for the menu
+		toggle_menu()
+
+func toggle_menu():
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fsq37"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1569197202]
-script = ExtResource("1_x2kuh")
+script = SubResource("GDScript_ebmhy")
 base_stats = ExtResource("4_stats")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1700580211]
@@ -18,7 +197,7 @@ shape = SubResource("CapsuleShape3D_fsq37")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1097929057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.399709, 0)
-script = ExtResource("2_am31l")
+script = SubResource("GDScript_rf0yd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1904168984]
 mesh = SubResource("CapsuleMesh_fsq37")

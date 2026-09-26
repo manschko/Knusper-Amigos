@@ -13,8 +13,10 @@ signal died
 @export var jump_buffer_time = 0.2
 @export var jump_cut_multiplier = 0.5
 @export var speed_transition = 6.0
-@export var bobbing_amplitude = 0.1
+@export var bobbing_amplitude = 0.02
 @export var bobbing_frequency = 10.0
+@export var shot_cooldown:float = 1.0
+@export var projectile: PackedScene
 
 var stats: PlayerStats
 var current_health: float
@@ -23,6 +25,7 @@ var bobbing_time = 0.0
 var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
 var speed = 0.0
+var shoot_timer = shot_cooldown
 
 @onready var camera = $Camera3D
 var initial_camera_y = 0.0
@@ -34,7 +37,7 @@ func _ready():
 	speed = stats.walk_speed
 	health_changed.emit(current_health, stats.health)
 
-func take_damage(amount: float, originPosition : Vector3) -> void:
+func take_damage(amount: float) -> void:
 	current_health = max(current_health - amount, 0.0)
 	health_changed.emit(current_health, stats.health)
 	if current_health <= 0.0:
@@ -47,6 +50,22 @@ func heal(amount: float) -> void:
 # Get the gravity from the project settings to ensure consistency.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _process(delta: float) -> void:
+	handle_inputs(delta)
+		
+func handle_inputs(delta: float):
+	if Input.is_action_just_pressed("shoot") and shot_cooldown <= shoot_timer:
+		shoot_timer = 0.0
+		var projectile = projectile.instantiate()
+		var force = 20
+		var direction = camera.global_basis * Vector3.FORWARD
+		projectile.position = position
+		projectile.linear_velocity = direction * force
+		get_parent().add_child(projectile)
+		print("Shoot!")
+	
+	if shot_cooldown >= shoot_timer:
+		shoot_timer += delta
 # This function is called every physics frame, which is ideal for
 # handling physics-based movement
 func _physics_process(delta):
@@ -107,15 +126,15 @@ func handle_movement(delta):
 	
 	Input.is_action_just_pressed("sprint")
 	if Input.is_action_pressed("sprint"):
-		speed = lerp(speed, stats.sprint_speed, delta * speed_transition)
+		speed = lerp(speed, stats.sprint_speed, delta)
 	else:
-		speed = lerp(speed, stats.walk_speed, delta * speed_transition)
+		speed = lerp(speed, stats.walk_speed, delta)
 
 	# If there is movement input, set the horizontal velocity.
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		bobbing_time += delta * bobbing_frequency
+		bobbing_time += delta * bobbing_frequency * speed
 		camera.position.y = initial_camera_y + bobbing_amplitude * sin(bobbing_time)
 	else:
 		# If there is no input, smoothly slow down the horizontal velocity.

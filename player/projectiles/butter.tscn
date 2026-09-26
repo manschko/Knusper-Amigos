@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://kejqyvhe8sxh"]
+
+[ext_resource type="Script" uid="uid://dekh1r2fh3ya7" path="res://player/projectiles/butter.gd" id="1_dsh0q"]
+[ext_resource type="Texture2D" uid="uid://becjrvs1b8epv" path="res://assets/butter.png" id="2_drxui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mmu5l"]
+size = Vector3(1, 0.2, 1)
+
+[node name="Butter" type="RigidBody3D" unique_id=1667415981]
+collision_layer = 4
+script = ExtResource("1_dsh0q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2086534568]
+shape = SubResource("BoxShape3D_mmu5l")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1064221733]
+flip_h = true
+texture = ExtResource("2_drxui")
