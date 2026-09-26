@@ -11,4 +11,4 @@ cost = 5
 max_level = 5
 cost_growth = 1.2
 stat_key = "walk_speed"
-value_per_level = 5.0
+value_per_level = 3.0

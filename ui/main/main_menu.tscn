@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://b1xvnelnadtdf"]
+
+[ext_resource type="Texture2D" uid="uid://dxa2gtw0ljckd" path="res://assets/menu.jpg" id="1_ocgdw"]
+[ext_resource type="Script" uid="uid://drio0eaqw44l3" path="res://ui/main/main_menu.gd" id="1_okkvt"]
+[ext_resource type="PackedScene" uid="uid://0iw0eddvawcl" path="res://GameScene.tscn" id="2_aapff"]
+[ext_resource type="Theme" uid="uid://xgbdxwjpqqyd" path="res://ui/UI_theme_cookies.tres" id="2_avjdu"]
+[ext_resource type="Texture2D" uid="uid://c5aced4ojgtmg" path="res://assets/Logo.png" id="2_kjq2u"]
+[ext_resource type="PackedScene" uid="uid://cl0vl037l6o4k" path="res://ui/settings/settings_menu.tscn" id="6_us4m4"]
+
+[node name="MainMenu" type="Control" unique_id=1231493791 node_paths=PackedStringArray("ui_element")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_okkvt")
+game_scene = ExtResource("2_aapff")
+ui_element = NodePath("MarginContainer/CenterContainer")
+settings_Scene = ExtResource("6_us4m4")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=743006109]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ocgdw")
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=302788131]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 200
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=906743388]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=118885753]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/CenterContainer/VBoxContainer2" unique_id=1154025906]
+layout_mode = 2
+theme_override_constants/margin_bottom = 64
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer2" unique_id=154814701]
+layout_mode = 2
+texture = ExtResource("2_kjq2u")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CenterContainer/VBoxContainer2" unique_id=719779883]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer" unique_id=1076409353]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Play_button" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer/VBoxContainer" unique_id=1743580603]
+layout_mode = 2
+theme = ExtResource("2_avjdu")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "PLAY"
+
+[node name="Settings_button" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer/VBoxContainer" unique_id=2076941258]
+layout_mode = 2
+theme = ExtResource("2_avjdu")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "SETTINGS"
+
+[node name="Quit_button" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer/VBoxContainer" unique_id=787179226]
+layout_mode = 2
+theme = ExtResource("2_avjdu")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "QUIT"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer/VBoxContainer/Play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer/VBoxContainer/Settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer2/MarginContainer/VBoxContainer/Quit_button" to="." method="_on_quit_button_pressed"]
