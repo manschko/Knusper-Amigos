@@ -1,21 +1,5 @@
 extends Node
 
-
-# Autoload: UpgradeManager
-#
-# Loads every Upgrade resource (.tres) found in UPGRADES_DIR, tracks how many
-# levels of each have been purchased, spends crumbs (via Stats) to buy levels,
-# and persists purchased levels to disk.
-#
-# Consumers (player.gd, enemy.gd, ...) do NOT get their stats mutated for
-# them. Instead they ask for the current bonus and add it to their own base
-# value, e.g.:
-#   speed = base_speed + UpgradeManager.get_bonus_for_stat("speed")
-# This keeps "what is the base stat" owned by the entity, and "how much extra
-# has been bought" owned by the upgrade system, avoiding double-applying
-# bonuses when a save is reloaded.
-
-
 const SAVE_PATH := "user://upgrades_save.json"
 
 signal upgrade_purchased(id: String, new_level: int)
@@ -34,7 +18,7 @@ func _update_upgrade_definitions() -> void:
 	upgrades.clear()
 	upgrades = UpgradeUtils.load_upgrade_definitions()
 	
-	
+
 	
 
 
@@ -58,7 +42,6 @@ func is_maxed(id: String) -> bool:
 	return get_level(id) >= upgrade.max_level
 
 
-## Cost to buy the *next* level of this upgrade.
 func get_cost(id: String) -> int:
 	var upgrade := get_upgrade(id)
 	if upgrade == null:
@@ -72,7 +55,6 @@ func can_afford(id: String) -> bool:
 	return cost >= 0 and Stats.get_crumbs() >= cost
 
 
-## Total bonus this single upgrade currently grants (level * value_per_level).
 func get_upgrade_bonus(id: String) -> float:
 	var upgrade := get_upgrade(id)
 	if upgrade == null:
@@ -80,8 +62,6 @@ func get_upgrade_bonus(id: String) -> float:
 	return get_level(id) * upgrade.value_per_level
 
 
-## Total bonus granted to a given stat by ALL purchased upgrades affecting it.
-## Consumers should call this and add the result to their own base stat.
 func get_bonus_for_stat(stat_key: String) -> float:
 	var total := 0.0
 	for id in upgrades.keys():
@@ -89,6 +69,19 @@ func get_bonus_for_stat(stat_key: String) -> float:
 		if upgrade.stat_key == stat_key:
 			total += get_upgrade_bonus(id)
 	return total
+
+
+func get_effective_stats(base: PlayerStats) -> PlayerStats:
+	if base == null:
+		push_warning("UpgradeManager: get_effective_stats() called with no base PlayerStats, using defaults")
+		base = PlayerStats.new()
+	var effective: PlayerStats = base.duplicate()
+	for property in effective.get_property_list():
+		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
+			var bonus := get_bonus_for_stat(property.name)
+			if bonus != 0.0:
+				effective.set(property.name, effective.get(property.name) + bonus)
+	return effective
 
 
 ## Attempts to buy the next level of the given upgrade.

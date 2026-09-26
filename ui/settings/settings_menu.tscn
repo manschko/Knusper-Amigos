@@ -24,9 +24,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme = ExtResource("2_fr2hu")
-current_tab = 0
+current_tab = 2
 
 [node name="Sound" type="MarginContainer" parent="TabContainer" unique_id=1741372608]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -41,14 +42,17 @@ theme_override_constants/separation = 11
 [node name="Music" parent="TabContainer/Sound/Sound" unique_id=784140164 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 setting_title = "Music"
+setting_key = "Music"
 
 [node name="SFX" parent="TabContainer/Sound/Sound" unique_id=1608783647 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 setting_title = "SFX"
+setting_key = "SFX"
 
 [node name="Master" parent="TabContainer/Sound/Sound" unique_id=435059889 instance=ExtResource("3_fr2hu")]
 layout_mode = 2
 setting_title = "Master"
+setting_key = "Master"
 
 [node name="Control" type="MarginContainer" parent="TabContainer" unique_id=1247335686]
 visible = false
@@ -81,7 +85,6 @@ setting_title = "Gamepad Vibration"
 setting_key = "gamepad_vibration"
 
 [node name="Graphics" type="MarginContainer" parent="TabContainer" unique_id=839159439]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16

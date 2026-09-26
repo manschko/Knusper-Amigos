@@ -10,5 +10,5 @@ description = "so schnell wie der Wind"
 cost = 40
 max_level = 5
 cost_growth = 1.2
-stat_key = "speed"
-value_per_level = 0.5
+stat_key = "walk_speed"
+value_per_level = 5.0

@@ -1,9 +1,12 @@
 # The script is attached to a CharacterBody3D node.
 extends CharacterBody3D
 
-# Exported variables can be modified directly in the Godot editor's Inspector panel.
-@export var walk_speed = 5.0
-@export var sprint_speed = 10.0
+signal health_changed(current: float, max_health: float)
+signal died
+
+@export var base_stats: PlayerStats
+
+# Movement feel tuning - not part of PlayerStats since these aren't upgraded.
 @export var jump_velocity = 4.5
 @export var coyote_time = 0.2
 @export var jump_buffer_time = 0.2
@@ -12,22 +15,39 @@ extends CharacterBody3D
 @export var bobbing_amplitude = 0.1
 @export var bobbing_frequency = 10.0
 
+var stats: PlayerStats
+var current_health: float
+
 var bobbing_time = 0.0
 var coyote_timer = 0.0
 var jump_buffer_timer = 0.0
-var speed = walk_speed
+var speed = 0.0
 
 @onready var camera = $Camera3D
 var initial_camera_y = 0.0
 
 func _ready():
 	initial_camera_y = camera.position.y
+	stats = UpgradeManager.get_effective_stats(base_stats)
+	current_health = stats.health
+	speed = stats.walk_speed
+	health_changed.emit(current_health, stats.health)
+
+func take_damage(amount: float) -> void:
+	current_health = max(current_health - amount, 0.0)
+	health_changed.emit(current_health, stats.health)
+	if current_health <= 0.0:
+		died.emit()
+
+func heal(amount: float) -> void:
+	current_health = min(current_health + amount, stats.health)
+	health_changed.emit(current_health, stats.health)
 
 # Get the gravity from the project settings to ensure consistency.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # This function is called every physics frame, which is ideal for
-# handling physics-based movement.
+# handling physics-based movement
 func _physics_process(delta):
 	
 	# Handle the jump input.
@@ -86,9 +106,9 @@ func handle_movement(delta):
 	
 	Input.is_action_just_pressed("sprint")
 	if Input.is_action_pressed("sprint"):
-		speed = lerp(speed, sprint_speed, delta * speed_transition)
+		speed = lerp(speed, stats.sprint_speed, delta * speed_transition)
 	else:
-		speed = lerp(speed, walk_speed, delta * speed_transition)
+		speed = lerp(speed, stats.walk_speed, delta * speed_transition)
 
 	# If there is movement input, set the horizontal velocity.
 	if direction:
