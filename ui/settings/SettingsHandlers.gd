@@ -32,7 +32,7 @@ func register_handlers():
 	SettingsManager.register_setting_handler("fullscreen", _on_fullscreen_changed)
 	SettingsManager.register_setting_handler("vsync", _on_vsync_changed)
 	SettingsManager.register_setting_handler("master", _on_master_volume_changed)
-	SettingsManager.register_setting_handler("frame rate limit", _on_frame_rate_limit_changed)
+	SettingsManager.register_setting_handler("frame_rate_limit", _on_frame_rate_limit_changed)
 	
 	# Graphics quality settings
 	SettingsManager.register_setting_handler("shadow_quality", _on_shadow_quality_changed)
@@ -101,13 +101,16 @@ func _on_resolution_changed(resolution_value):
 func _on_fullscreen_changed(fullscreen: String):
 	print("Fullscreen changed to: ", fullscreen)
 	
-	if fullscreen == "fullscreen":
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	elif fullscreen == "windowed":
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	elif fullscreen == "borderless":
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	match fullscreen.to_lower():
+		"fullscreen":
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		"windowed":
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		"borderless":
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _on_vsync_changed(vsync_enabled: bool):
 	print_debug("VSync changed to: ", vsync_enabled)
@@ -123,7 +126,7 @@ func _on_master_volume_changed(volume: float):
 func _on_frame_rate_limit_changed(frame_rate: String):
 	print("Frame rate limit changed to: ", frame_rate)
 	
-	if frame_rate == "unlimited":
+	if frame_rate.to_lower() == "unlimited":
 		Engine.max_fps = 0
 	else:
 		Engine.max_fps = int(frame_rate)
@@ -268,21 +271,22 @@ func _on_audio_output_device_changed(device_name: String):
 func _on_mouse_sensitivity_changed(sensitivity: float):
 	print("Mouse sensitivity changed to: ", sensitivity)
 	
-	# Store mouse sensitivity in a global setting or autoload
-	# This would typically be used by your input handling code
 	ProjectSettings.set_setting("input/mouse_sensitivity", sensitivity)
 	
-	# You could also emit a signal for other systems to listen to
-	# GlobalSignals.mouse_sensitivity_changed.emit(sensitivity)
+	# Apply immediately to the active camera, if any.
+	var cam = get_viewport().get_camera_3d()
+	if cam and cam.has_method("set_mouse_sensitivity"):
+		cam.set_mouse_sensitivity(sensitivity)
 
 func _on_invert_mouse_y_changed(invert: bool):
 	print("Invert mouse Y-axis changed to: ", invert)
 	
-	# Store the invert setting
 	ProjectSettings.set_setting("input/invert_mouse_y", invert)
 	
-	# Emit signal for input systems to respond
-	# GlobalSignals.mouse_invert_y_changed.emit(invert)
+	# Apply immediately to the active camera, if any.
+	var cam = get_viewport().get_camera_3d()
+	if cam and cam.has_method("set_invert_y"):
+		cam.set_invert_y(invert)
 
 func _on_gamepad_vibration_changed(enabled: bool):
 	print("Gamepad vibration changed to: ", enabled)

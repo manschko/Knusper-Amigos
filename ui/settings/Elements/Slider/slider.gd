@@ -1,4 +1,4 @@
-
+@tool
 extends BaseSetting
 		
 @export var min_val: float = 0.0
@@ -40,7 +40,7 @@ func _on_slider_value_changed(value: float):
 	if is_updating: return
 	is_updating = true
 	line_edit.text = str(int(value))
-	value_changed.emit(setting_title, value)
+	value_changed.emit(setting_key, value)
 	is_updating = false
 
 # When the user presses Enter in the text box...
@@ -54,7 +54,7 @@ func _on_line_edit_text_submitted(new_text: String):
 	is_updating = true
 	slider.value = new_val
 	line_edit.text = str(int(new_val)) # Update text to the clamped value
-	value_changed.emit(setting_title, new_val)
+	value_changed.emit(setting_key, new_val)
 	is_updating = false
 	
 func set_label(value: String):

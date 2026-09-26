@@ -26,5 +26,5 @@ func reset_to_default():
 
 # When the user drags the slider...
 func _on_select_value_changed(value: float):
-	value_changed.emit(setting_title, values[value])
+	value_changed.emit(setting_key, values[value])
 	

@@ -24,5 +24,5 @@ func reset_to_default():
 
 # When the user drags the slider...
 func _on_checkbox_value_changed(value: bool):
-	value_changed.emit(setting_title, value)
+	value_changed.emit(setting_key, value)
 	
