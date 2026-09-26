@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b2fw0krv5k4yd" path="res://EnemyBehaviour/EnemyBahaviour.gd" id="1_kwuay"]
 [ext_resource type="Texture2D" uid="uid://bnyk87wr0e8tv" path="res://assets/Enemy1Spritesheet.png" id="2_7f1kg"]
-[ext_resource type="Resource" path="res://EnemyBehaviour/base_enemy_stats.tres" id="3_stats"]
+[ext_resource type="Resource" uid="uid://d4auk85dqs3jk" path="res://EnemyBehaviour/base_enemy_stats.tres" id="3_stats"]
+
+[sub_resource type="Curve" id="Curve_1o7h6"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.9), 0.0, 0.0, 0, 0, Vector2(1, 1.1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xtt4n"]
 size = Vector3(1, 1.355, 0.1)
@@ -10,6 +15,7 @@ size = Vector3(1, 1.355, 0.1)
 [node name="Enemy" type="CharacterBody3D" unique_id=928747577]
 script = ExtResource("1_kwuay")
 base_stats = ExtResource("3_stats")
+_walkCurve = SubResource("Curve_1o7h6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345111102]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67749023, 0)

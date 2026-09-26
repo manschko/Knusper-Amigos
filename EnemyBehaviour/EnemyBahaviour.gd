@@ -4,6 +4,8 @@ class_name EnemyBahaviour
 @export var _player : Player;
 @export var base_stats : EnemyStats;
 @export var _deathTimer : float = 2;
+@export var _walkCurve : Curve;
+@export var _walkAnimationSpeed : float = 1;
 
 ## Final stats for this enemy. Set by the spawner before add_child (with difficulty
 ## applied); otherwise built from base_stats + upgrades in _ready.
@@ -11,7 +13,7 @@ var stats : EnemyStats;
 
 var _health : float;
 var _dead : bool = false;
-
+var _walkAnimationTimer : float = 1;
 var _attackTimer : float = 0;
 @onready var _sprite = $Sprite3D;
 signal _onDeathSignal(value: int)
@@ -45,21 +47,32 @@ func _physics_process(delta: float) -> void:
 	if position.distance_to(_player.position) <= stats.attack_range:
 		_processAttack();
 	else:
-		_processMovement();
+		_processMovement(delta);
 	
 	move_and_slide()
 
 
-func _processMovement() -> void:
+func _processMovement(delta : float) -> void:
 	var moveDirection = (_player.position - position).normalized() * stats.speed;
 	moveDirection.y = velocity.y;
 	if not is_on_floor():
 		moveDirection.y = -gravity
 	velocity = moveDirection;
+	
+	_walkAnimationTimer += delta * _walkAnimationSpeed;
+	if _walkAnimationTimer > 1:
+		_walkAnimationTimer -= 1;
+	var timerOffset = _walkAnimationTimer + 0.5;
+	if timerOffset > 1:
+		timerOffset -= 1;
+	_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1);
 
 func _processAttack() -> void:
 	if _attackTimer > 0:
 		return;
+	
+	_sprite.scale = Vector3.ONE;
+	_walkAnimationTimer = 1;
 	
 	velocity = Vector3.ZERO;
 	_player.take_damage(stats.attack_damage);
