@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://i57rc6qu4fnj"]
+
+[ext_resource type="Script" uid="uid://d14q8vrvyjjqs" path="res://ui/settings/Elements/Slider/slider.gd" id="1_ewci8"]
+
+[node name="Slider" type="PanelContainer" unique_id=1830815369]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ewci8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1462734670]
+custom_minimum_size = Vector2(0, 0.015)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=428215263]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer" unique_id=1385464543]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "TEST"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1559953067]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/HBoxContainer" unique_id=1362838714]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 20.0
+value = 50.0
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/HBoxContainer" unique_id=182547503]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "50"

@@ -1,0 +1,32 @@
+[gd_resource type="Theme" format=3 uid="uid://co3x6b7ogo23m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umixl"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.559739, 0.000609528, 0.640503, 0.0627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lk2nq"]
+content_margin_left = 5.0
+content_margin_top = 25.0
+content_margin_right = 5.0
+bg_color = Color(0.215686, 0.160784, 0.211765, 0.278431)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lk2nq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h6t8"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.215686, 0.160784, 0.211765, 1)
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_umixl")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_lk2nq")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_lk2nq")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_3h6t8")
+VBoxContainer/constants/separation = 10

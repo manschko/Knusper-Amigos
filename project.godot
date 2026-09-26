@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 Stats="*uid://c2yakcs0bkahy"
 UpgradeManager="*res://incremental/upgrades/upgrade_manager.gd"
+SettingsManager="*uid://dw2itv4e2iwr0"
+AudioManager="*uid://b8ysp31h8v320"
 
 [dotnet]
 

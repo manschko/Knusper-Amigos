@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbsul4i64owcr"]
+
+[ext_resource type="Script" uid="uid://cvv3a3i4xuj1p" path="res://scenes/Menu/settings/Elements/toggle/toggle.gd" id="1_40k2e"]
+
+[node name="Toggle" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_40k2e")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 0.015)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6

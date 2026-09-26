@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://cl0vl037l6o4k"]
+
+[ext_resource type="Script" uid="uid://b5r4lh5t4ywoo" path="res://ui/settings/SettingsHandlers.gd" id="1_v136q"]
+[ext_resource type="Theme" uid="uid://b0vja5wtseub3" path="res://ui/UI_theme.tres" id="2_fr2hu"]
+[ext_resource type="PackedScene" uid="uid://i57rc6qu4fnj" path="res://ui/settings/Elements/Slider/slider.tscn" id="3_fr2hu"]
+
+[node name="Control" type="Control" unique_id=2067214690]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=2020566245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fr2hu")
+current_tab = 0
+script = ExtResource("1_v136q")
+
+[node name="Sound" type="MarginContainer" parent="TabContainer" unique_id=1741372608]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 0
+
+[node name="Sound" type="VBoxContainer" parent="TabContainer/Sound" unique_id=66979906]
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Music" parent="TabContainer/Sound/Sound" unique_id=784140164 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+setting_title = "Music"
+
+[node name="SFX" parent="TabContainer/Sound/Sound" unique_id=1608783647 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+setting_title = "SFX"
+
+[node name="Master" parent="TabContainer/Sound/Sound" unique_id=435059889 instance=ExtResource("3_fr2hu")]
+layout_mode = 2
+setting_title = "Master"
+
+[node name="Control" type="VBoxContainer" parent="TabContainer" unique_id=1247335686]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Button" type="Button" parent="TabContainer/Control" unique_id=972308108]
+layout_mode = 2
+text = "sfdgfsd"
+
+[node name="Graphics" type="VBoxContainer" parent="TabContainer" unique_id=839159439]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Button" type="Button" parent="TabContainer/Graphics" unique_id=157056711]
+layout_mode = 2
+text = "ahgah"
+
+[node name="CloseButton" type="Button" parent="." unique_id=1044645706]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme = ExtResource("2_fr2hu")
+text = "X"
