@@ -15,3 +15,4 @@ metadata/_custom_type_script = "uid://davocmro27thv"
 script = ExtResource("1")
 scene = ExtResource("2_26y07")
 base_stats = SubResource("Resource_6hcjr")
+min_wave = 5

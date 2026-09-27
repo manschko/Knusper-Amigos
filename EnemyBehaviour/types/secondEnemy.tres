@@ -2,7 +2,18 @@
 
 [ext_resource type="Script" uid="uid://ijippv57iy42" path="res://EnemyBehaviour/enemy_type.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://chqoat0uwr2by" path="res://EnemyBehaviour/EnemyTwo.tscn" id="1_7705g"]
+[ext_resource type="Script" uid="uid://davocmro27thv" path="res://EnemyBehaviour/enemy_stats.gd" id="1_xc3oe"]
+
+[sub_resource type="Resource" id="Resource_2cnhl"]
+script = ExtResource("1_xc3oe")
+health = 150.0
+speed = 0.8
+attack_damage = 3.0
+attack_cooldown = 1.2
+metadata/_custom_type_script = "uid://davocmro27thv"
 
 [resource]
 script = ExtResource("1")
 scene = ExtResource("1_7705g")
+base_stats = SubResource("Resource_2cnhl")
+min_wave = 3
