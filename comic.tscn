@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dkcr6kmctvgx7"]
+
+[ext_resource type="Script" uid="uid://dqk8bh72u0o2r" path="res://comic.gd" id="1_cgwm2"]
+[ext_resource type="Texture2D" uid="uid://dxa2gtw0ljckd" path="res://assets/menu.jpg" id="1_y1fjr"]
+
+[node name="Comic" type="Control" unique_id=2002692810]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cgwm2")
+next_scene = "res://GameScene.tscn"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1608134833]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y1fjr")
+stretch_mode = 4

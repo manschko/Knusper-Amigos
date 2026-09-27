@@ -4,3 +4,8 @@
 
 [resource]
 script = ExtResource("1")
+health_growth = 1.2
+damage_growth = 1.2
+attack_speed_growth = 1.05
+speed_growth = 1.2
+max_speed_multiplier = 5.0

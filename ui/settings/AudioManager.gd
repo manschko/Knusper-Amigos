@@ -6,9 +6,9 @@ var MusicPlayer:AudioStreamPlayer
 var next_player := 0
 
 var DEFAULT_MUSIC: AudioStreamMP3 = preload("res://assets/Komiku - To fight a spell by dancing.mp3")
-## Mix level of the music player in dB (0 = original loudness, -6 ≈ half as loud).
-## Independent of the player's "Music" volume setting, which controls the bus on top of this.
 const MUSIC_VOLUME_DB := -15.0
+
+var BUTTON_CRUNCH: AudioStreamMP3 = preload("res://assets/crunch.mp3")
 
 func _init() -> void:
 	# Keep playing audio (music/SFX) even while the game tree is paused.
@@ -127,3 +127,7 @@ func set_bus_volume(bus_name: String, percent) -> void:
 		return
 	var linear_volume = clamp(float(percent) / 100.0, 0.0, 1.0)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(linear_volume))
+	
+func button_crunch():
+	play_sfx(BUTTON_CRUNCH)
+	
