@@ -5,7 +5,10 @@ var SFXplayers: Array[AudioStreamPlayer] = []
 var MusicPlayer:AudioStreamPlayer
 var next_player := 0
 
-#const DEFAULT_MUSIC_PATH := "res://sound/003_Vaporware.mp3"
+var DEFAULT_MUSIC: AudioStreamMP3 = preload("res://assets/Komiku - To fight a spell by dancing.mp3")
+## Mix level of the music player in dB (0 = original loudness, -6 ≈ half as loud).
+## Independent of the player's "Music" volume setting, which controls the bus on top of this.
+const MUSIC_VOLUME_DB := -15.0
 
 func _init() -> void:
 	# Keep playing audio (music/SFX) even while the game tree is paused.
@@ -23,10 +26,9 @@ func _ready() -> void:
 	p.bus = "Music"
 	MusicPlayer = p
 
-	#var default_music: AudioStream = load(DEFAULT_MUSIC_PATH)
-	#if default_music:
-		#default_music.loop = true
-		#play_music(default_music)
+	# The import has loop disabled, so enable it on the stream itself.
+	DEFAULT_MUSIC.loop = true
+	play_music(DEFAULT_MUSIC)
 
 	# Apply any previously saved volume settings right away, so they take
 	# effect from the moment the game starts (not just when the settings
@@ -109,10 +111,12 @@ func play_random_sfx(streams: Array[AudioStream], group: StringName = &"",
 		return false
 	return play_sfx(streams.pick_random(), group, max_in_group, interrupt, randf_range(0.9, 1.1), owner)
 	
-func play_music(stream: AudioStream) -> void:
+## [param volume_db] sets the track's mix level, so individual tracks can be balanced.
+func play_music(stream: AudioStream, volume_db: float = MUSIC_VOLUME_DB) -> void:
 	if not stream:
 		return
 	MusicPlayer.stream = stream
+	MusicPlayer.volume_db = volume_db
 	MusicPlayer.play()
 
 ## Sets the volume of an audio bus from a 0-100 percentage value
