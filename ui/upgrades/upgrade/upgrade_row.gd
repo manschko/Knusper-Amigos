@@ -57,4 +57,5 @@ func _set_highlight(on: bool) -> void:
 		_style.border_color = BORDER_HOVER if on else BORDER_NORMAL
 
 func _on_buy_button_pressed() -> void:
+	AudioManager.button_crunch()
 	upgrade_pressed.emit()

@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 
 
 func _on_continue_pressed() -> void:
+	AudioManager.button_crunch()
 	togglePause()
 	
 
@@ -27,6 +28,7 @@ func togglePause():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_settings_pressed() -> void:
+	AudioManager.button_crunch()
 	if settings:
 		return
 	settings = settingsScene.instantiate()
@@ -39,6 +41,7 @@ func _on_settings_close() -> void:
 
 
 func _on_quit_pressed() -> void:
+	AudioManager.button_crunch()
 	get_tree().quit()
 	#get_tree().paused = false
 	#pause = false

@@ -5,10 +5,12 @@ extends Control
 @export var settings_Scene: PackedScene
 
 func _on_play_button_pressed() -> void:
+	AudioManager.button_crunch()
 	get_tree().change_scene_to_packed(game_scene)
 
 
 func _on_settings_button_pressed() -> void:
+	AudioManager.button_crunch()
 	ui_element.hide()
 	var s = settings_Scene.instantiate()
 	s.closed.connect(func(): ui_element.show())
@@ -16,4 +18,5 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
+	AudioManager.button_crunch()
 	get_tree().quit()
