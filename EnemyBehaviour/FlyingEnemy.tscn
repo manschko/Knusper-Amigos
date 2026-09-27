@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://ct57s4q1uyyml"]
+
+[ext_resource type="Script" uid="uid://b2fw0krv5k4yd" path="res://EnemyBehaviour/EnemyBahaviour.gd" id="1_6hcjr"]
+[ext_resource type="Resource" uid="uid://d4auk85dqs3jk" path="res://Balancing/base_enemy_stats.tres" id="2_0wbmg"]
+[ext_resource type="PackedScene" uid="uid://btsppodadawtt" path="res://player/projectiles/enemyProjectile.tscn" id="3_0wbmg"]
+[ext_resource type="Texture2D" uid="uid://bnyk87wr0e8tv" path="res://assets/Enemy1Spritesheet.png" id="3_3xw15"]
+
+[sub_resource type="Curve" id="Curve_1o7h6"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.9), 0.0, 0.0, 0, 0, Vector2(1, 1.1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_od2d5"]
+height = 1.1699219
+
+[node name="Enemy" type="CharacterBody3D" unique_id=928747577]
+motion_mode = 1
+script = ExtResource("1_6hcjr")
+base_stats = ExtResource("2_0wbmg")
+_walkCurve = SubResource("Curve_1o7h6")
+_isFlying = true
+_projectile = ExtResource("3_0wbmg")
+_projectileSpeed = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345111102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5983887, 0)
+shape = SubResource("CylinderShape3D_od2d5")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=196595858]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31936228, 0.60061914, 0)
+pixel_size = 0.001
+texture = ExtResource("3_3xw15")
+hframes = 4

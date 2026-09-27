@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://jtpiihhxfc1e"]
+
+[ext_resource type="Script" uid="uid://ijippv57iy42" path="res://EnemyBehaviour/enemy_type.gd" id="1"]
+[ext_resource type="Script" uid="uid://davocmro27thv" path="res://EnemyBehaviour/enemy_stats.gd" id="1_6h24m"]
+[ext_resource type="PackedScene" uid="uid://ct57s4q1uyyml" path="res://EnemyBehaviour/FlyingEnemy.tscn" id="2_26y07"]
+
+[sub_resource type="Resource" id="Resource_6hcjr"]
+script = ExtResource("1_6h24m")
+speed = 2.0
+attack_range = 8.0
+attack_cooldown = 3.0
+metadata/_custom_type_script = "uid://davocmro27thv"
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2_26y07")
+base_stats = SubResource("Resource_6hcjr")
