@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://b2uf5vogomhlm"]
 
 [ext_resource type="Script" uid="uid://ijippv57iy42" path="res://EnemyBehaviour/enemy_type.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://chqoat0uwr2by" path="res://EnemyBehaviour/EnemyTwo.tscn" id="1_7705g"]
 
 [resource]
 script = ExtResource("1")
-scene = ExtResource("2")
+scene = ExtResource("1_7705g")
