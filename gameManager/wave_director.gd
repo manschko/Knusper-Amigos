@@ -8,7 +8,7 @@ signal enemy_killed(value: int)
 
 const GROUP := "wave_director"
 
-@export var config: WaveConfig = preload("res://EnemyBehaviour/default_wave_config.tres")
+@export var config: WaveConfig = preload("res://Balancing/default_wave_config.tres")
 @export_dir var enemy_types_dir: String = "res://EnemyBehaviour/types"
 
 @export_group("Spawn area")

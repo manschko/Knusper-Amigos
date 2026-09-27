@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WaveConfig" format=3 uid="uid://dooovlgqo4btf"]
 
-[ext_resource type="Script" uid="uid://c3rucpg1wayd4" path="res://EnemyBehaviour/wave_config.gd" id="1"]
+[ext_resource type="Script" uid="uid://c3rucpg1wayd4" path="res://gameManager/wave_config.gd" id="1"]
 
 [resource]
 script = ExtResource("1")

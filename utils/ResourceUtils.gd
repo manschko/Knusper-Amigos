@@ -1,7 +1,7 @@
 extends Node
 class_name UpgradeUtils
 
-const UPGRADES_DIR := "res://incremental/upgrades/data/"
+const UPGRADES_DIR := "res://Balancing/upgrades/"
 
 static func load_upgrade_definitions() -> Dictionary:
 	var found_upgrades: Dictionary = {}

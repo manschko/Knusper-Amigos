@@ -7,8 +7,6 @@ class_name EnemyBahaviour
 @export var _walkCurve : Curve;
 @export var _walkAnimationSpeed : float = 1;
 
-## Final stats for this enemy. Set by the spawner before add_child (with difficulty
-## applied); otherwise built from base_stats + upgrades in _ready.
 var stats : EnemyStats;
 
 var _health : float;
