@@ -46,9 +46,10 @@ func face_the_camera():
 func _on_body_entered(body: Node) -> void:
 	if body is EnemyBahaviour:
 		var final_damage = damage
-		if randf() <= UpgradeManager.get_bonus_for_stat("crit_chance"):
+		crit = randf() <= UpgradeManager.get_bonus_for_stat("crit_chance")
+		if crit:
 			final_damage *= (2 + UpgradeManager.get_bonus_for_stat("crit_multiplier"))
-		#todo display damage number
+		DamageNumber.spawn(get_tree().current_scene, body.global_position, final_damage, crit)
 		body.take_damage(final_damage);
 		var nSplash : Splash = splashObject.instantiate();
 		nSplash.position = position;

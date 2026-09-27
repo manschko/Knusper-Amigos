@@ -19,10 +19,12 @@ func togglePause():
 		hide()
 		get_tree().paused = false
 		pause = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
 		show()
 		get_tree().paused = true
 		pause = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_settings_pressed() -> void:
 	if settings:

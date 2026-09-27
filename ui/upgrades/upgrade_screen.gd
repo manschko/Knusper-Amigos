@@ -15,6 +15,7 @@ extends Control
 signal upgrades_closed
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	refresh()
 
 func refresh() -> void:
