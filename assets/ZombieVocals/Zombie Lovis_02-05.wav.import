@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ftb51ttshksu"
+path="res://.godot/imported/Zombie Lovis_02-05.wav-e21d868b5869273ede15b0a9f6fc2d31.sample"
+
+[deps]
+
+source_file="res://assets/ZombieVocals/Zombie Lovis_02-05.wav"
+dest_files=["res://.godot/imported/Zombie Lovis_02-05.wav-e21d868b5869273ede15b0a9f6fc2d31.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

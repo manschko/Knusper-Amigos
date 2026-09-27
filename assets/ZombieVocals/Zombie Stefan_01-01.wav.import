@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://128pw3gndiy8"
+path="res://.godot/imported/Zombie Stefan_01-01.wav-1d61d825d8f3c62ee09148b46c261204.sample"
+
+[deps]
+
+source_file="res://assets/ZombieVocals/Zombie Stefan_01-01.wav"
+dest_files=["res://.godot/imported/Zombie Stefan_01-01.wav-1d61d825d8f3c62ee09148b46c261204.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
