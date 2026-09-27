@@ -20,6 +20,7 @@ var _walkAnimationTimer : float = 1;
 var _attackTimer : float = 0;
 var _groanTimer : float = 0;
 @onready var _sprite = $Sprite3D;
+@onready var collision = $CollisionShape3D
 signal _onDeathSignal(value: int)
 
 @export var _isFlying = false;
@@ -143,6 +144,7 @@ func take_damage(damage: float) -> void:
 	AudioManager.stop_for(self);
 	AudioManager.play_random_sfx(ZombieSounds.death(), &"zombie_death", AudioManager.num_players, true, self);
 	_onDeathSignal.emit(stats.value);
+	collision_layer = 0
 	
 	_sprite.frame = 2;
 	_dead = true;
