@@ -4,7 +4,9 @@ const SAVE_PATH := "user://stats_save.json"
 signal crumbs_updated
 
 var stats: Dictionary = {
-	"crumbs": 100
+	"crumbs": 100,
+	"best_wave": 0,
+	"last_wave": 0,
 						}
 
 # Called when the node enters the scene tree for the first time.
@@ -24,6 +26,23 @@ func get_crumbs() -> int:
 func reset_stats() -> void:
 	stats["crumbs"] = 0
 	save_stats()
+
+
+func submit_wave(wave: int) -> bool:
+	stats["last_wave"] = wave
+	var is_record := wave > get_best_wave()
+	if is_record:
+		stats["best_wave"] = wave
+	save_stats()
+	return is_record
+
+
+func get_best_wave() -> int:
+	return int(stats["best_wave"])
+
+
+func get_last_wave() -> int:
+	return int(stats["last_wave"])
 
 func remove_crumbs(amount: int) -> bool:
 	var old_value = stats["crumbs"]

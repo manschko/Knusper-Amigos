@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bbpf4p6oafovi"]
 
 [ext_resource type="Script" uid="uid://csjs5g8nwfxsu" path="res://gameManager/gameManager.gd" id="1_8equb"]
+[ext_resource type="Script" uid="uid://c7goitc6538w3" path="res://gameManager/wave_director.gd" id="2_wave"]
 
 [node name="GameManager" type="Node3D" unique_id=560973131]
 script = ExtResource("1_8equb")
+
+[node name="WaveDirector" type="Node" parent="." unique_id=514119263]
+script = ExtResource("2_wave")

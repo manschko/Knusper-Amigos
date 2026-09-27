@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://dsu58g3r53x1h"]
+
+[ext_resource type="Script" uid="uid://dljgh81bcga81" path="res://ui/upgrades/upgrade/upgrade_row.gd" id="1_row"]
+[ext_resource type="Texture2D" uid="uid://crwt2wi0hpffh" path="res://prototype/craftpix-tiny-hero-sprites/1 Pink_Monster/Pink_Monster.png" id="2_icon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfuou"]
+content_margin_left = 20.0
+content_margin_top = 16.0
+content_margin_right = 20.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2, 0.21, 0.13, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.3647059, 0.3882353, 0.19607843, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.12, 0.125, 0.08, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.12, 0.125, 0.08, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_fill"]
+bg_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
+border_width_bottom = 12
+border_color = Color(0.3647059, 0.3882353, 0.19607843, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 24.0
+content_margin_bottom = 18.0
+bg_color = Color(0.6, 0.78, 0.2, 1)
+border_width_top = 6
+border_width_bottom = 6
+border_color = Color(0.3647059, 0.3882353, 0.19607843, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.3647059, 0.3882353, 0.19607843, 1)
+border_width_bottom = 12
+border_color = Color(0.2, 0.21, 0.13, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_disabled"]
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.36, 0.37, 0.3, 1)
+border_width_bottom = 12
+border_color = Color(0.22, 0.23, 0.18, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[node name="UpgradeRow" type="PanelContainer" unique_id=342175030]
+custom_minimum_size = Vector2(0, 150)
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_mfuou")
+script = ExtResource("1_row")
+
+[node name="HBox" type="HBoxContainer" parent="." unique_id=1186366823]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="IconFrame" type="PanelContainer" parent="HBox" unique_id=344918283]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(118, 118)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_icon")
+
+[node name="Icon" type="TextureRect" parent="HBox/IconFrame" unique_id=53005354]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="HBox" unique_id=1444008270]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="HBox/Info" unique_id=1409323876]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="HBox/Info/Header" unique_id=1533597271]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+text = "Upgrade Name"
+text_overrun_behavior = 3
+
+[node name="LevelLabel" type="Label" parent="HBox/Info/Header" unique_id=651095306]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
+theme_override_font_sizes/font_size = 30
+text = "Lv. 0 / 5"
+
+[node name="DescriptionLabel" type="Label" parent="HBox/Info" unique_id=1169757160]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.87, 0.78, 1)
+theme_override_font_sizes/font_size = 24
+text = "This upgrade is awesome and lets you dig faster."
+autowrap_mode = 3
+
+[node name="LevelBar" type="ProgressBar" parent="HBox/Info" unique_id=1626355550]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
+max_value = 5.0
+step = 1.0
+show_percentage = false
+
+[node name="BuyButton" type="Button" parent="HBox" unique_id=2039470086]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.75, 0.76, 0.7, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_btn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+text = "10 Crumbs"
+
+[connection signal="pressed" from="HBox/BuyButton" to="." method="_on_buy_button_pressed"]

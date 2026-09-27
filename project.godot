@@ -37,6 +37,7 @@ project/assembly_name="Knusper Amigos"
 [file_customization]
 
 folder_colors={
+"res://Balancing/": "yellow",
 "res://assets/": "pink",
 "res://player/": "orange",
 "res://ui/": "green"

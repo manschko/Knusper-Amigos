@@ -9,7 +9,8 @@ extends Control
 @export var upgrade_component: PackedScene
 @export var currency: Currency
 
-@onready var upgrade_list: VBoxContainer = $MarginContainer/PanelContainer/MarginContainer2/VBoxContainer/ScrollContainer/UpgradeList
+@onready var upgrade_list: VBoxContainer = %UpgradeList
+@onready var run_info: Label = %RunInfo
 
 signal upgrades_closed
 
@@ -19,6 +20,12 @@ func _ready() -> void:
 func refresh() -> void:
 	_rebuild_upgrade_list()
 	_link_currency()
+	_update_run_info()
+
+func _update_run_info() -> void:
+	var best := Stats.get_best_wave()
+	run_info.visible = best > 0
+	run_info.text = "Wave %d   Best %d" % [Stats.get_last_wave(), best]
 
 func _link_currency() -> void:
 	Stats.crumbs_updated.connect(func(crumbs): currency.set_label(str(crumbs)))
@@ -28,8 +35,16 @@ func _rebuild_upgrade_list() -> void:
 	for child in upgrade_list.get_children():
 		child.queue_free()
 
-	
+	# Maxed upgrades go to the bottom; otherwise keep the original order.
+	var available: Array = []
+	var maxed: Array = []
 	for upgrade in UpgradeManager.upgrades.values():
+		if UpgradeManager.is_maxed(upgrade.id):
+			maxed.append(upgrade)
+		else:
+			available.append(upgrade)
+
+	for upgrade in available + maxed:
 		_build_upgrade_row(upgrade)
 
 func _build_upgrade_row(upgrade: Upgrade) -> Control:
@@ -37,15 +52,17 @@ func _build_upgrade_row(upgrade: Upgrade) -> Control:
 		printerr("upgradeComponente missing from upgrade screen")
 		return
 	
-	var component: Upgrade_UI = upgrade_component.instantiate()
+	var component: UpgradeRow = upgrade_component.instantiate()
 	upgrade_list.add_child(component)
 	var level := UpgradeManager.get_level(upgrade.id)
 	var maxed := UpgradeManager.is_maxed(upgrade.id)
 
-	component.set_label("%s %d/%d" % [upgrade.display_name, level, upgrade.max_level])
+	component.set_title(upgrade.display_name)
+	component.set_level(level, upgrade.max_level)
 	component.set_description(upgrade.description if upgrade.description else "")
 	component.set_cost("MAXED" if maxed else _format_cost(upgrade.get_cost(level)))
 	component.set_icon(upgrade.icon)
+	component.set_disabled(maxed or not UpgradeManager.can_afford(upgrade.id))
 	component.upgrade_pressed.connect(_on_buy_pressed.bind(upgrade))
 
 

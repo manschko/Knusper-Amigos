@@ -8,17 +8,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 12
 script = ExtResource("1_0lo5h")
 
 [node name="icon" type="TextureRect" parent="." unique_id=1404457193]
 texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 3
-offset_transform_scale = Vector2(2, 2)
-expand_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
 
 [node name="label" type="Label" parent="." unique_id=1376600845]
 layout_mode = 2
-theme_override_constants/line_spacing = 22
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7176471, 0.9019608, 0.2509804, 1)
+theme_override_font_sizes/font_size = 48
 text = "0"

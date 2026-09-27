@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://EnemyBehaviour/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bxlwlnu2h12d8" path="res://EnemyBehaviour/Enemy.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
