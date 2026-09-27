@@ -46,7 +46,7 @@ func _ready():
 	health_changed.emit(current_health, stats.health)
 
 func take_damage(amount: float) -> void:
-	current_health = max(current_health - amount, 0.0)
+	current_health = max(current_health - max(amount, 5.0), 0.0)
 	health_changed.emit(current_health, stats.health)
 	if current_health <= 0.0:
 		died.emit()

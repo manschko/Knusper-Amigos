@@ -93,7 +93,7 @@ func _apply_stat_bonuses(effective: Resource, prefix: String) -> Resource:
 			var bonus := get_bonus_for_stat(prefix + property.name)
 			if bonus == 0.0:
 				continue
-			var new_value = min(max(effective.get(property.name) + bonus, 1), 999999)
+			var new_value = min(max(effective.get(property.name) + bonus, 0), 999999)
 			if property.type == TYPE_INT:
 				new_value = int(round(new_value))
 			effective.set(property.name, new_value)
