@@ -9,6 +9,7 @@ radius = 0.3
 
 [node name="Butter" type="RigidBody3D" unique_id=1667415981]
 collision_layer = 4
+collision_mask = 17
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_dsh0q")

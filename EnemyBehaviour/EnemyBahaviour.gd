@@ -7,13 +7,20 @@ class_name EnemyBahaviour
 @export var _walkCurve : Curve;
 @export var _walkAnimationSpeed : float = 1;
 
+@export var _groanIntervalMin : float = 4.0;
+@export var _groanIntervalMax : float = 12.0;
+const MAX_GROAN_CHANNELS := 3
+const MAX_HIT_CHANNELS := 4
+
 var stats : EnemyStats;
 
 var _health : float;
 var _dead : bool = false;
 var _walkAnimationTimer : float = 1;
 var _attackTimer : float = 0;
+var _groanTimer : float = 0;
 @onready var _sprite = $Sprite3D;
+@onready var collision = $CollisionShape3D
 signal _onDeathSignal(value: int)
 
 @export var _isFlying = false;
@@ -26,6 +33,7 @@ func _ready() -> void:
 	if stats == null:
 		stats = UpgradeManager.get_effective_enemy_stats(base_stats);
 	_health = stats.health;
+	_groanTimer = randf_range(0.0, _groanIntervalMax);
 	if _isFlying:
 		position.y += 3;
 
@@ -78,6 +86,13 @@ func _processMovement(delta : float) -> void:
 	var timerOffset = _walkAnimationTimer + 0.5;
 	if timerOffset > 1:
 		timerOffset -= 1;
+	_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1);
+	
+	_groanTimer -= delta;
+	if _groanTimer <= 0:
+		_groanTimer = randf_range(_groanIntervalMin, _groanIntervalMax);
+		if not AudioManager.is_playing_for(self):
+			AudioManager.play_random_sfx(ZombieSounds.movement(), &"zombie_movement", MAX_GROAN_CHANNELS, false, self);
 	if not _isFlying:
 		_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1);
 	else:
@@ -120,9 +135,16 @@ func _processAirAttack() -> void:
 func take_damage(damage: float) -> void:
 	if _dead: return;
 	_health -= damage;
-	if _health > 0: return;
+	# Each zombie has one "voice": multishot hits on the same zombie don't stack.
+	if _health > 0:
+		if not AudioManager.is_playing_for(self):
+			AudioManager.play_random_sfx(ZombieSounds.hit(), &"zombie_hit", MAX_HIT_CHANNELS, false, self);
+		return;
 	
+	AudioManager.stop_for(self);
+	AudioManager.play_random_sfx(ZombieSounds.death(), &"zombie_death", AudioManager.num_players, true, self);
 	_onDeathSignal.emit(stats.value);
+	collision_layer = 0
 	
 	_sprite.frame = 2;
 	_dead = true;

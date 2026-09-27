@@ -5,7 +5,10 @@ var SFXplayers: Array[AudioStreamPlayer] = []
 var MusicPlayer:AudioStreamPlayer
 var next_player := 0
 
-#const DEFAULT_MUSIC_PATH := "res://sound/003_Vaporware.mp3"
+var DEFAULT_MUSIC: AudioStreamMP3 = preload("res://assets/Komiku - To fight a spell by dancing.mp3")
+## Mix level of the music player in dB (0 = original loudness, -6 ≈ half as loud).
+## Independent of the player's "Music" volume setting, which controls the bus on top of this.
+const MUSIC_VOLUME_DB := -15.0
 
 func _init() -> void:
 	# Keep playing audio (music/SFX) even while the game tree is paused.
@@ -23,10 +26,9 @@ func _ready() -> void:
 	p.bus = "Music"
 	MusicPlayer = p
 
-	#var default_music: AudioStream = load(DEFAULT_MUSIC_PATH)
-	#if default_music:
-		#default_music.loop = true
-		#play_music(default_music)
+	# The import has loop disabled, so enable it on the stream itself.
+	DEFAULT_MUSIC.loop = true
+	play_music(DEFAULT_MUSIC)
 
 	# Apply any previously saved volume settings right away, so they take
 	# effect from the moment the game starts (not just when the settings
@@ -40,14 +42,81 @@ func _ready() -> void:
 func play_vfx_sound(stream: AudioStream) -> void:
 	if not stream:
 		return
-	SFXplayers[next_player].stream = stream
-	SFXplayers[next_player].play()
+	var p := SFXplayers[next_player]
+	p.stream = stream
+	p.pitch_scale = 1.0
+	p.set_meta("group", &"")
+	p.set_meta("owner_id", 0)
+	p.play()
 	next_player = (next_player + 1) % num_players
+
+## True while a sound started with [param owner] is still playing.
+func is_playing_for(owner: Object) -> bool:
+	return _player_for(owner) != null
+
+## Stops the sound currently playing for [param owner] (if any), freeing its channel.
+func stop_for(owner: Object) -> void:
+	var p := _player_for(owner)
+	if p:
+		p.stop()
+
+func _player_for(owner: Object) -> AudioStreamPlayer:
+	if owner == null:
+		return null
+	var id := owner.get_instance_id()
+	for p in SFXplayers:
+		if p.playing and p.get_meta("owner_id", 0) == id:
+			return p
+	return null
+
+## Plays a sound on a free SFX channel without cutting off other sounds.
+## [param group] + [param max_in_group] cap how many channels one kind of sound
+## may occupy (e.g. zombie groans), so frequent sounds can't hog all channels.
+## With [param interrupt] the oldest-playing channel is taken over when all are busy.
+## [param owner] tags the sound so it can be queried/stopped via is_playing_for/stop_for.
+## Returns false if the sound was dropped.
+func play_sfx(stream: AudioStream, group: StringName = &"", max_in_group: int = num_players,
+		interrupt: bool = false, pitch: float = 1.0, owner: Object = null) -> bool:
+	if not stream:
+		return false
+	var free_player: AudioStreamPlayer = null
+	var oldest: AudioStreamPlayer = null
+	var in_group := 0
+	for p in SFXplayers:
+		if not p.playing:
+			if free_player == null:
+				free_player = p
+			continue
+		if group != &"" and p.get_meta("group", &"") == group:
+			in_group += 1
+		if oldest == null or p.get_playback_position() > oldest.get_playback_position():
+			oldest = p
+	if group != &"" and in_group >= max_in_group:
+		return false
+	var target := free_player
+	if target == null:
+		if not interrupt:
+			return false
+		target = oldest
+	target.stream = stream
+	target.pitch_scale = pitch
+	target.set_meta("group", group)
+	target.set_meta("owner_id", owner.get_instance_id() if owner else 0)
+	target.play()
+	return true
+
+func play_random_sfx(streams: Array[AudioStream], group: StringName = &"",
+		max_in_group: int = num_players, interrupt: bool = false, owner: Object = null) -> bool:
+	if streams.is_empty():
+		return false
+	return play_sfx(streams.pick_random(), group, max_in_group, interrupt, randf_range(0.9, 1.1), owner)
 	
-func play_music(stream: AudioStream) -> void:
+## [param volume_db] sets the track's mix level, so individual tracks can be balanced.
+func play_music(stream: AudioStream, volume_db: float = MUSIC_VOLUME_DB) -> void:
 	if not stream:
 		return
 	MusicPlayer.stream = stream
+	MusicPlayer.volume_db = volume_db
 	MusicPlayer.play()
 
 ## Sets the volume of an audio bus from a 0-100 percentage value
