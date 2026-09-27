@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dxa2gtw0ljckd" path="res://assets/menu.jpg" id="1_ocgdw"]
 [ext_resource type="Script" uid="uid://drio0eaqw44l3" path="res://ui/main/main_menu.gd" id="1_okkvt"]
-[ext_resource type="PackedScene" uid="uid://0iw0eddvawcl" path="res://GameScene.tscn" id="2_aapff"]
 [ext_resource type="Theme" uid="uid://xgbdxwjpqqyd" path="res://ui/UI_theme_cookies.tres" id="2_avjdu"]
 [ext_resource type="Texture2D" uid="uid://c5aced4ojgtmg" path="res://assets/Logo.png" id="2_kjq2u"]
+[ext_resource type="PackedScene" uid="uid://dkcr6kmctvgx7" path="res://comic.tscn" id="2_us4m4"]
 [ext_resource type="PackedScene" uid="uid://cl0vl037l6o4k" path="res://ui/settings/settings_menu.tscn" id="6_us4m4"]
 
 [node name="MainMenu" type="Control" unique_id=1231493791 node_paths=PackedStringArray("ui_element")]
@@ -17,7 +17,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_okkvt")
-game_scene = ExtResource("2_aapff")
+game_scene = ExtResource("2_us4m4")
 ui_element = NodePath("MarginContainer/CenterContainer")
 settings_Scene = ExtResource("6_us4m4")
 
