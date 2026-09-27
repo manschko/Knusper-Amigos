@@ -9,8 +9,8 @@ _limits = [0.0, 1.5, 0.0, 1.0]
 _data = [Vector2(0, 1.1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.9), 0.0, 0.0, 0, 0, Vector2(1, 1.1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xtt4n"]
-size = Vector3(1, 1.355, 0.1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_od2d5"]
+height = 1.1699219
 
 [node name="Enemy" type="CharacterBody3D" unique_id=928747577]
 script = ExtResource("1_kwuay")
@@ -18,8 +18,8 @@ base_stats = ExtResource("3_stats")
 _walkCurve = SubResource("Curve_1o7h6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345111102]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67749023, 0)
-shape = SubResource("BoxShape3D_xtt4n")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5983887, 0)
+shape = SubResource("CylinderShape3D_od2d5")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=196595858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31936228, 0.60061914, 0)
