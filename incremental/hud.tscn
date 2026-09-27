@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://co4nxo5v0uhyk" path="res://incremental/health_bar.gd" id="4_pib85"]
 [ext_resource type="Texture2D" uid="uid://c16qrh2q71wxi" path="res://assets/Lebensanzeige.png" id="4_t50we"]
 [ext_resource type="Texture2D" uid="uid://b2dfq0xv5g865" path="res://assets/Lebensanzeige_front.png" id="6_uj1cg"]
+[ext_resource type="PackedScene" path="res://ui/hud/wave_hud.tscn" id="7_wave"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmu5l"]
 bg_color = Color(0.9843137, 0.75686276, 0.41568628, 0)
@@ -150,6 +151,8 @@ text = "Buy Speed"
 [node name="health" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=162239947]
 layout_mode = 2
 text = "remove health"
+
+[node name="WaveHud" parent="." instance=ExtResource("7_wave")]
 
 [node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
 visible = false

@@ -10,6 +10,7 @@ extends Control
 @export var currency: Currency
 
 @onready var upgrade_list: VBoxContainer = %UpgradeList
+@onready var run_info: Label = %RunInfo
 
 signal upgrades_closed
 
@@ -19,6 +20,12 @@ func _ready() -> void:
 func refresh() -> void:
 	_rebuild_upgrade_list()
 	_link_currency()
+	_update_run_info()
+
+func _update_run_info() -> void:
+	var best := Stats.get_best_wave()
+	run_info.visible = best > 0
+	run_info.text = "Wave %d   Best %d" % [Stats.get_last_wave(), best]
 
 func _link_currency() -> void:
 	Stats.crumbs_updated.connect(func(crumbs): currency.set_label(str(crumbs)))
