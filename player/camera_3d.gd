@@ -23,8 +23,12 @@ func set_mouse_sensitivity(percent: float) -> void:
 func set_invert_y(value: bool) -> void:
 	invert_y = value
 
+func _exit_tree():
+	# Leaving gameplay (e.g. player died -> upgrade screen) must give the cursor back.
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Rotate the parent node (horizontal rotation)
 		mouse_x_rotation -= event.relative.x * sensitivity
 		rotation.y = deg_to_rad(mouse_x_rotation)
@@ -34,12 +38,3 @@ func _unhandled_input(event):
 		mouse_y_rotation -= event.relative.y * sensitivity * y_dir
 		mouse_y_rotation = clamp(mouse_y_rotation, min_pitch, max_pitch)
 		rotation.x = deg_to_rad(mouse_y_rotation)
-	
-	if event.is_action_pressed("ui_cancel"): # Use a custom action for the menu
-		toggle_menu()
-
-func toggle_menu():
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
