@@ -28,6 +28,7 @@ signal _onDeathSignal(value: int)
 @export var _projectileSpeed : float;
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var _startScale : float;
 
 func _ready() -> void:
 	if stats == null:
@@ -36,6 +37,7 @@ func _ready() -> void:
 	_groanTimer = randf_range(0.0, _groanIntervalMax);
 	if _isFlying:
 		position.y += 3;
+	_startScale = _sprite.scale.x;
 
 func _physics_process(delta: float) -> void:
 	
@@ -86,7 +88,7 @@ func _processMovement(delta : float) -> void:
 	var timerOffset = _walkAnimationTimer + 0.5;
 	if timerOffset > 1:
 		timerOffset -= 1;
-	_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1);
+	_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1) * _startScale;
 	
 	_groanTimer -= delta;
 	if _groanTimer <= 0:
@@ -94,7 +96,7 @@ func _processMovement(delta : float) -> void:
 		if not AudioManager.is_playing_for(self):
 			AudioManager.play_random_sfx(ZombieSounds.movement(), &"zombie_movement", MAX_GROAN_CHANNELS, false, self);
 	if not _isFlying:
-		_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1);
+		_sprite.scale = Vector3(_walkCurve.sample(_walkAnimationTimer), _walkCurve.sample(timerOffset), 1) * _startScale;
 	else:
 		_sprite.position = Vector3(0, _walkCurve.sample(_walkAnimationTimer), 0);
 

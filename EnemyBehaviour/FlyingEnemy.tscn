@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2fw0krv5k4yd" path="res://EnemyBehaviour/EnemyBahaviour.gd" id="1_6hcjr"]
 [ext_resource type="Resource" uid="uid://d4auk85dqs3jk" path="res://Balancing/base_enemy_stats.tres" id="2_0wbmg"]
 [ext_resource type="PackedScene" uid="uid://btsppodadawtt" path="res://player/projectiles/enemyProjectile.tscn" id="3_0wbmg"]
-[ext_resource type="Texture2D" uid="uid://bnyk87wr0e8tv" path="res://assets/Enemy1Spritesheet.png" id="3_3xw15"]
+[ext_resource type="Texture2D" uid="uid://baceojpwtf1ui" path="res://assets/Enemy3Spritesheet.png" id="4_0wbmg"]
 
 [sub_resource type="Curve" id="Curve_1o7h6"]
 _limits = [0.0, 1.5, 0.0, 1.0]
@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5983887, 0)
 shape = SubResource("CylinderShape3D_od2d5")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=196595858]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31936228, 0.60061914, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0013934374, 0.8630085, 0)
 pixel_size = 0.001
-texture = ExtResource("3_3xw15")
-hframes = 4
+texture = ExtResource("4_0wbmg")
+hframes = 3
