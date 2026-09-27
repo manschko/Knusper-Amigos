@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://ypv5athlmk4"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_phvxu"]
+
+[resource]
+script = ExtResource("1_phvxu")
+id = "enemy_speed"
+display_name = "Glasur Boden"
+description = "Die Gegner bleiben wohl kleben"
+cost = 5
+max_level = 100
+stat_key = "enemy_speed"
+value_per_level = -0.05
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"

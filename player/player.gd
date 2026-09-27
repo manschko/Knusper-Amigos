@@ -64,14 +64,35 @@ func _process(delta: float) -> void:
 func handle_inputs(delta: float):
 	if Input.is_action_just_pressed("shoot") and shot_cooldown <= shoot_timer:
 		shoot_timer = 0.0
-		var projectile = projectile.instantiate()
+		
+		var projectiles = []
+		var new_projectile = projectile.instantiate()
 		const tilt_up_deg = 15
 		var direction = camera.global_basis.rotated(camera.global_basis.x, deg_to_rad(tilt_up_deg)) * Vector3.FORWARD
 		var muzzle_offset = Vector3(0.5, -0.3, 0)
-		projectile.position = camera.global_transform * muzzle_offset
-		projectile.linear_velocity = direction * projectile_force + get_inherited_projectile_velocity(direction)
-		projectile.damage = stats.damage
-		get_parent().add_child(projectile)
+		new_projectile.position = camera.global_transform * muzzle_offset
+		new_projectile.linear_velocity = direction * projectile_force + get_inherited_projectile_velocity(direction)
+		new_projectile.damage = stats.damage
+		projectiles.append(new_projectile)
+		
+		for i in range(UpgradeManager.get_bonus_for_stat("multishot")):
+			const variation = 8
+			var min_val = tilt_up_deg - variation
+			var max_val = tilt_up_deg + variation
+			var pitch_variance = randi_range(min_val, max_val)
+			var yaw = randi_range(-variation, variation)
+			new_projectile = projectile.instantiate()
+			direction = camera.global_basis.rotated(camera.global_basis.x, deg_to_rad(pitch_variance))
+			direction = direction.rotated(camera.global_basis.y, deg_to_rad(yaw))
+			var final_direction = direction * Vector3.FORWARD
+			new_projectile.position = camera.global_transform * muzzle_offset
+			new_projectile.linear_velocity = final_direction * projectile_force + get_inherited_projectile_velocity(final_direction)
+			new_projectile.damage = stats.damage
+			projectiles.append(new_projectile)
+			
+		for p in projectiles:
+			get_parent().add_child(p)
+		
 		hand.throw()
 		print("Shoot!")
 	

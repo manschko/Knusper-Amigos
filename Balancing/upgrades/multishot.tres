@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://bs0q3dflrom30"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_ino3y"]
+
+[resource]
+script = ExtResource("1_ino3y")
+id = "multishot"
+display_name = "Mehr Butter"
+description = "Was gibt es schöneres?"
+cost = 15
+cost_growth = 3.0
+stat_key = "multishot"
+value_per_level = 1.0
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"

@@ -8,5 +8,6 @@ id = "damage_boost"
 display_name = "Muskeln"
 description = "Damage ist besser als Schaden"
 cost = 5
+max_level = 100
 stat_key = "damage"
 value_per_level = 2.0

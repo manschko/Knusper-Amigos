@@ -8,6 +8,7 @@ id = "attack_speed"
 display_name = "Finger"
 description = "Fingerfertig wie der Wind"
 cost = 5
+max_level = 100
 stat_key = "attack_speed"
 value_per_level = 0.3
 metadata/_custom_type_script = "uid://bl4sfou7r64hu"

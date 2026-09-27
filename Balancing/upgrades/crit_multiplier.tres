@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://dhuik3e1pfym4"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_lpyoq"]
+
+[resource]
+script = ExtResource("1_lpyoq")
+id = "crit_multiplier"
+display_name = "Marken Salz"
+description = "Besseres Salz ist immer besser"
+cost = 5
+max_level = 100
+stat_key = "crit_multiplier"
+value_per_level = 0.03
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"

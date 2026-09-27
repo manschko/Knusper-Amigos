@@ -22,7 +22,8 @@ func spawn_player() -> void:
 
 
 func _on_enemy_killed(value: int) -> void:
-	Stats.add_crumbs(value)
+	Stats.add_crumbs(value * (UpgradeManager.get_bonus_for_stat('crumb_boost') + 1))
+	player.heal(UpgradeManager.get_bonus_for_stat('lifesteal'))
 
 
 func _on_player_died() -> void:

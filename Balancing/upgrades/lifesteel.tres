@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://ckw3hkd7uod5"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_6kdlw"]
+
+[resource]
+script = ExtResource("1_6kdlw")
+id = "lifesteal"
+display_name = "Snackpause"
+description = "ein bisschen Leben für ziwschen durch"
+cost = 5
+max_level = 100
+stat_key = "lifesteal"
+value_per_level = 1.0
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"

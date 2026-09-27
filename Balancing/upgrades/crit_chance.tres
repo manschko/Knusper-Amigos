@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://b4l60bpggngu6"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_vqoox"]
+
+[resource]
+script = ExtResource("1_vqoox")
+id = "crit_chance"
+display_name = "Slaty"
+description = "Mit ein Priese Salz tut es gleich mehr weh"
+cost = 5
+max_level = 100
+stat_key = "crit_chance"
+value_per_level = 0.01
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"
