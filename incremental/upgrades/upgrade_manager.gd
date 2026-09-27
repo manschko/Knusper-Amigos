@@ -57,10 +57,12 @@ func can_afford(id: String) -> bool:
 
 
 func get_upgrade_bonus(id: String) -> float:
-	var upgrade := get_upgrade(id)
-	if upgrade == null:
-		return 0.0
-	return get_level(id) * upgrade.value_per_level
+	#todo fix this just testin
+	return get_upgrade(id).value_per_level * 5
+	#var upgrade := get_upgrade(id)
+	#if upgrade == null:
+		#return 0.0
+	#return get_level(id) * upgrade.value_per_level
 
 
 func get_bonus_for_stat(stat_key: String) -> float:

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://ygekj0dqnf26"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_ckqff"]
+
+[resource]
+script = ExtResource("1_ckqff")
+id = "enemy_health_debuff"
+display_name = "Milch"
+description = "Um die Kekse etwas weiche zu machen"
+cost = 5
+max_level = 100
+stat_key = "enemy_health"
+value_per_level = -5.0
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"

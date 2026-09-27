@@ -158,6 +158,7 @@ func _on_enemy_died(value: int, id: int) -> void:
 	kills += 1
 	wave_progress.emit(kills, quota)
 	if kills >= quota:
+		Stats.add_crumbs(time_left * UpgradeManager.get_bonus_for_stat("rush_bonus"))
 		_start_wave(wave + 1)
 
 

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://bggiuu6pcp1vv"]
+
+[ext_resource type="Script" uid="uid://bl4sfou7r64hu" path="res://incremental/upgrades/upgrade.gd" id="1_ino3y"]
+
+[resource]
+script = ExtResource("1_ino3y")
+id = "rush_bonus"
+display_name = "Speedrun mechnic"
+description = "wer schnell ist wird belohnt"
+cost = 5
+max_level = 100
+stat_key = "rush_bonus"
+value_per_level = 0.5
+metadata/_custom_type_script = "uid://bl4sfou7r64hu"

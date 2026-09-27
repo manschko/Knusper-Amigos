@@ -7,6 +7,7 @@ const ANGLE_DOWN_DEG := -45.0
 const Z_ROT_UP_DEG := -45.0
 const Z_ROT_DOWN_DEG := 40.0
 var damage = 1
+var crit = false
 
 @onready var sprite: Sprite3D = $CollisionShape3D/Sprite3D
 
@@ -44,7 +45,11 @@ func face_the_camera():
 
 func _on_body_entered(body: Node) -> void:
 	if body is EnemyBahaviour:
-		body.take_damage(damage);
+		var final_damage = damage
+		if randf() <= UpgradeManager.get_bonus_for_stat("crit_chance"):
+			final_damage *= (2 + UpgradeManager.get_bonus_for_stat("crit_multiplier"))
+		#todo display damage number
+		body.take_damage(final_damage);
 		var nSplash : Splash = splashObject.instantiate();
 		nSplash.position = position;
 		get_tree().current_scene.add_child(nSplash);
