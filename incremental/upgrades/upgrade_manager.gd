@@ -128,6 +128,20 @@ func reset_levels() -> void:
 	_save_levels()
 
 
+## Debug helper: sets every upgrade to [param level] (clamped to each upgrade's
+## max_level). If [param include_enemy_debuffs] is false (default), upgrades whose
+## stat_key targets enemy stats (stat_key starting with "enemy_") are left untouched.
+func debug_set_all_levels(level: int, include_enemy_debuffs: bool = false) -> void:
+	for id in upgrades.keys():
+		var upgrade: Upgrade = upgrades[id]
+		if not include_enemy_debuffs and upgrade.stat_key.begins_with(ENEMY_STAT_PREFIX):
+			continue
+		var clamped_level := clampi(level, 0, upgrade.max_level)
+		levels[id] = clamped_level
+		upgrade_purchased.emit(id, clamped_level)
+	_save_levels()
+
+
 func _save_levels() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:

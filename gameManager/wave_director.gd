@@ -52,6 +52,19 @@ func stop() -> void:
 	running = false
 
 
+## Debug helper: jumps straight to [param target_wave] (min 1), resetting kills/quota/
+## timer as if that wave had just started. If [param clear_enemies] is true (default),
+## any currently alive enemies are removed so the new wave starts clean.
+func debug_set_wave(target_wave: int, clear_enemies: bool = true) -> void:
+	if clear_enemies:
+		for id in _tracked.keys():
+			var enemy := instance_from_id(id)
+			if is_instance_valid(enemy):
+				enemy.queue_free()
+		_tracked.clear()
+	_start_wave(max(target_wave, 1))
+
+
 func get_alive_count() -> int:
 	return _tracked.size()
 
