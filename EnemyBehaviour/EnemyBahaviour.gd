@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 func _processMovement(delta : float) -> void:
 	var moveDirection = _player.position - position;
 	moveDirection.y = 0;
-	moveDirection = moveDirection.normalized() * stats.speed;
+	moveDirection = moveDirection.normalized() * max(stats.speed, 1);
 	
 	if not _isFlying:
 		moveDirection.y = velocity.y;

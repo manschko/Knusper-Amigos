@@ -17,7 +17,7 @@ const GROUP := "wave_director"
 @export var arena_center: Vector3 = Vector3.ZERO
 @export var arena_radius: float = 50.0
 
-var wave: int = 0
+var wave: int = 100
 var kills: int = 0
 var quota: int = 0
 var time_left: float = 0.0

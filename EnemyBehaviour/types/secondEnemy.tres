@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_2cnhl"]
 script = ExtResource("1_xc3oe")
-health = 150.0
+health = 60.0
 speed = 0.8
 attack_damage = 3.0
 attack_cooldown = 1.2
