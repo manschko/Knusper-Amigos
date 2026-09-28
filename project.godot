@@ -91,6 +91,7 @@ toggle_debug={
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Projectile"
+3d_physics/layer_5="Enemies"
 
 [rendering]
 
