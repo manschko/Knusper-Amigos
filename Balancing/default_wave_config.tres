@@ -4,6 +4,9 @@
 
 [resource]
 script = ExtResource("1")
+base_quota = 10
+base_duration = 25.0
+max_alive_per_wave = 2
 health_growth = 1.2
 damage_growth = 1.2
 attack_speed_growth = 1.005
