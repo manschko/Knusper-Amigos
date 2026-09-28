@@ -59,6 +59,11 @@ func _on_set_all_levels_pressed() -> void:
 	UpgradeManager.debug_set_all_levels(level, include_enemy_debuffs)
 
 
+func _on_reset_all_levels_pressed() -> void:
+	UpgradeManager.reset_levels()
+	_refresh()
+
+
 func _on_set_wave_pressed() -> void:
 	var wave_director := _get_wave_director()
 	if wave_director == null:

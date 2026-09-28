@@ -173,6 +173,10 @@ text = "Include enemy debuffs"
 layout_mode = 2
 text = "Set All Upgrade Levels"
 
+[node name="ResetAllLevels" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=772319451]
+layout_mode = 2
+text = "Reset All Upgrade Levels"
+
 [node name="WaveLabel" type="Label" parent="UpgradeDebug/VBoxContainer" unique_id=772319446]
 layout_mode = 2
 text = "Wave: 1"
@@ -203,4 +207,5 @@ visible = false
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuySpeed" to="UpgradeDebug" method="_on_buy_speed_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/health" to="MarginContainer/health/MarginContainer/healthBar" method="_on_health_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/SetAllLevels" to="UpgradeDebug" method="_on_set_all_levels_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/ResetAllLevels" to="UpgradeDebug" method="_on_reset_all_levels_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/SetWave" to="UpgradeDebug" method="_on_set_wave_pressed"]
