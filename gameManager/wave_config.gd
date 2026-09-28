@@ -23,6 +23,10 @@ class_name WaveConfig
 
 @export_group("Bosses")
 @export var boss_every: int = 0
+@export var boss_health_multiplier: float = 8.0
+@export var boss_damage_multiplier: float = 2.5
+@export var boss_scale_multiplier: float = 2.5
+@export var boss_value_multiplier: float = 5.0
 
 
 func get_quota(wave: int) -> int:
@@ -53,3 +57,12 @@ func apply(base: EnemyStats, wave: int) -> EnemyStats:
 	scaled.speed *= speed_multiplier
 	scaled.value = int(round(scaled.value * get_multiplier(value_growth, wave)))
 	return scaled
+
+
+## Boosts an already wave-scaled EnemyStats copy for a boss spawn; base is not modified.
+func apply_boss_bonus(base: EnemyStats) -> EnemyStats:
+	var boosted: EnemyStats = base.duplicate()
+	boosted.health *= boss_health_multiplier
+	boosted.attack_damage *= boss_damage_multiplier
+	boosted.value = int(round(boosted.value * boss_value_multiplier))
+	return boosted

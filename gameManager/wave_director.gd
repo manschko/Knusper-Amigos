@@ -5,6 +5,7 @@ signal wave_started(wave: int)
 signal wave_progress(kills: int, quota: int)
 signal wave_time_changed(time_left: float, duration: float)
 signal enemy_killed(value: int)
+signal boss_spawned(boss: EnemyBahaviour)
 
 const GROUP := "wave_director"
 
@@ -98,21 +99,47 @@ func _start_wave(new_wave: int) -> void:
 	wave_started.emit(wave)
 	wave_progress.emit(kills, quota)
 	wave_time_changed.emit(time_left, duration)
+	if _is_boss_wave(wave):
+		_spawn_boss()
+
+
+func _is_boss_wave(target_wave: int) -> bool:
+	return config.boss_every > 0 and target_wave % config.boss_every == 0
 
 
 func _spawn_enemy() -> void:
 	var type := _pick_type()
 	if type == null:
 		return
+	_instantiate_enemy(type, false)
 
+
+func _spawn_boss() -> void:
+	var type := _pick_type()
+	if type == null:
+		push_warning("WaveDirector: no enemy type available to spawn as a boss")
+		return
+	var boss := _instantiate_enemy(type, true)
+	if boss != null:
+		boss_spawned.emit(boss)
+
+
+## Instantiates [param type], applies upgrade + wave-growth stat scaling (and, for
+## bosses, the extra boss multipliers + visual scale-up), then tracks it like a
+## normal enemy so existing kill/quota bookkeeping keeps working.
+func _instantiate_enemy(type: EnemyType, is_boss: bool) -> EnemyBahaviour:
 	var enemy := type.scene.instantiate() as EnemyBahaviour
 	if enemy == null:
 		push_warning("WaveDirector: scene of '%s' has no EnemyBahaviour root" % type.resource_path)
-		return
+		return null
 
 	var base := type.base_stats if type.base_stats else enemy.base_stats
 	var stats := UpgradeManager.get_effective_enemy_stats(base)
-	enemy.stats = config.apply(stats, wave)
+	stats = config.apply(stats, wave)
+	if is_boss:
+		stats = config.apply_boss_bonus(stats)
+		enemy.add_to_group("boss")
+	enemy.stats = stats
 	enemy._player = _player
 
 	var id := enemy.get_instance_id()
@@ -123,6 +150,9 @@ func _spawn_enemy() -> void:
 
 	enemy.position = _get_spawn_position()
 	_enemy_parent.add_child(enemy)
+	if is_boss:
+		enemy.scale *= config.boss_scale_multiplier
+	return enemy
 
 
 func _pick_type() -> EnemyType:
