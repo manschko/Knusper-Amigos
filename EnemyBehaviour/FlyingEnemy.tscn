@@ -15,6 +15,8 @@ height = 1.1699219
 
 [node name="Enemy" type="CharacterBody3D" unique_id=928747577]
 motion_mode = 1
+collision_layer = 16
+collision_mask = 17
 script = ExtResource("1_6hcjr")
 base_stats = ExtResource("2_0wbmg")
 _walkCurve = SubResource("Curve_1o7h6")
@@ -28,6 +30,7 @@ shape = SubResource("CylinderShape3D_od2d5")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=196595858]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0013934374, 0.8630085, 0)
+billboard = 2
 pixel_size = 0.001
 texture = ExtResource("4_0wbmg")
 hframes = 3

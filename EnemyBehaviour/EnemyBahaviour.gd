@@ -43,6 +43,12 @@ func _physics_process(delta: float) -> void:
 	
 	if _dead:
 		_deathTimer -= delta;
+		if _isFlying:
+			# Let dead flying enemies drop to the ground instead of staying stuck mid-air.
+			velocity.x = 0;
+			velocity.z = 0;
+			velocity.y -= gravity * delta;
+			move_and_slide();
 		if _deathTimer <= 0:
 			queue_free();
 		return;
@@ -56,6 +62,9 @@ func _physics_process(delta: float) -> void:
 	if _attackTimer > 0:
 		if attackTimerBefore > stats.attack_animation_time and _attackTimer <= stats.attack_animation_time:
 			_sprite.frame = 0;
+		if _isFlying:
+			# Keep bobbing during the attack cooldown instead of freezing in place.
+			_doFlyAnimation(delta);
 		return;
 	
 	if position.distance_to(_player.position) <= stats.attack_range:
@@ -73,7 +82,7 @@ func _physics_process(delta: float) -> void:
 func _processMovement(delta : float) -> void:
 	var moveDirection = _player.position - position;
 	moveDirection.y = 0;
-	moveDirection = moveDirection.normalized() * stats.speed;
+	moveDirection = moveDirection.normalized() * max(stats.speed, base_stats.speed);
 	
 	if not _isFlying:
 		moveDirection.y = velocity.y;
@@ -147,6 +156,10 @@ func take_damage(damage: float) -> void:
 	AudioManager.play_random_sfx(ZombieSounds.death(), &"zombie_death", AudioManager.num_players, true, self);
 	_onDeathSignal.emit(stats.value);
 	collision_layer = 0
+	# Flying corpses should sink through the floor instead of landing on it,
+	# so drop their collision with the environment too.
+	if _isFlying:
+		collision_mask = 0
 	
 	_sprite.frame = 2;
 	_dead = true;

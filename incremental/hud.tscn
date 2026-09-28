@@ -110,6 +110,7 @@ texture = ExtResource("6_uj1cg")
 flip_h = true
 
 [node name="UpgradeDebug" type="Control" parent="." unique_id=345857655]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -152,7 +153,52 @@ text = "Buy Speed"
 layout_mode = 2
 text = "remove health"
 
-[node name="WaveHud" parent="." instance=ExtResource("7_wave")]
+[node name="SetAllLevelRow" type="HBoxContainer" parent="UpgradeDebug/VBoxContainer" unique_id=772319441]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradeDebug/VBoxContainer/SetAllLevelRow" unique_id=772319442]
+layout_mode = 2
+text = "Set all lvl:"
+
+[node name="SetAllLevelSpinBox" type="SpinBox" parent="UpgradeDebug/VBoxContainer/SetAllLevelRow" unique_id=772319443]
+layout_mode = 2
+max_value = 999.0
+value = 10.0
+
+[node name="IncludeEnemyDebuffsCheckBox" type="CheckBox" parent="UpgradeDebug/VBoxContainer" unique_id=772319444]
+layout_mode = 2
+text = "Include enemy debuffs"
+
+[node name="SetAllLevels" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=772319445]
+layout_mode = 2
+text = "Set All Upgrade Levels"
+
+[node name="ResetAllLevels" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=772319451]
+layout_mode = 2
+text = "Reset All Upgrade Levels"
+
+[node name="WaveLabel" type="Label" parent="UpgradeDebug/VBoxContainer" unique_id=772319446]
+layout_mode = 2
+text = "Wave: 1"
+
+[node name="SetWaveRow" type="HBoxContainer" parent="UpgradeDebug/VBoxContainer" unique_id=772319447]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradeDebug/VBoxContainer/SetWaveRow" unique_id=772319448]
+layout_mode = 2
+text = "Set wave:"
+
+[node name="SetWaveSpinBox" type="SpinBox" parent="UpgradeDebug/VBoxContainer/SetWaveRow" unique_id=772319449]
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 1.0
+
+[node name="SetWave" type="Button" parent="UpgradeDebug/VBoxContainer" unique_id=772319450]
+layout_mode = 2
+text = "Set Wave"
+
+[node name="WaveHud" parent="." unique_id=1048641775 instance=ExtResource("7_wave")]
 
 [node name="pauseMenu" parent="." unique_id=428125992 instance=ExtResource("3_sab5r")]
 visible = false
@@ -160,3 +206,6 @@ visible = false
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuyDamage" to="UpgradeDebug" method="_on_buy_damage_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/BuySpeed" to="UpgradeDebug" method="_on_buy_speed_pressed"]
 [connection signal="pressed" from="UpgradeDebug/VBoxContainer/health" to="MarginContainer/health/MarginContainer/healthBar" method="_on_health_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/SetAllLevels" to="UpgradeDebug" method="_on_set_all_levels_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/ResetAllLevels" to="UpgradeDebug" method="_on_reset_all_levels_pressed"]
+[connection signal="pressed" from="UpgradeDebug/VBoxContainer/SetWave" to="UpgradeDebug" method="_on_set_wave_pressed"]

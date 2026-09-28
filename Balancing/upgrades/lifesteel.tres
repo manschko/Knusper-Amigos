@@ -10,5 +10,5 @@ description = "ein bisschen Leben für ziwschen durch"
 cost = 5
 max_level = 100
 stat_key = "lifesteal"
-value_per_level = 1.0
+value_per_level = 0.5
 metadata/_custom_type_script = "uid://bl4sfou7r64hu"

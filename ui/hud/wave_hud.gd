@@ -23,6 +23,7 @@ func _ready() -> void:
 	_director.wave_started.connect(_on_wave_started)
 	_director.wave_progress.connect(_on_wave_progress)
 	_director.wave_time_changed.connect(_on_wave_time_changed)
+	_director.boss_spawned.connect(_on_boss_spawned)
 	if _director.running:
 		wave_label.text = "Wave %d" % _director.wave
 		_on_wave_progress(_director.kills, _director.quota)
@@ -32,6 +33,10 @@ func _ready() -> void:
 func _on_wave_started(wave: int) -> void:
 	wave_label.text = "Wave %d" % wave
 	_show_banner("Wave %d" % wave)
+
+
+func _on_boss_spawned(_boss: EnemyBahaviour) -> void:
+	_show_banner("BOSS INCOMING")
 
 
 func _on_wave_progress(kills: int, quota: int) -> void:

@@ -93,7 +93,7 @@ func _apply_stat_bonuses(effective: Resource, prefix: String) -> Resource:
 			var bonus := get_bonus_for_stat(prefix + property.name)
 			if bonus == 0.0:
 				continue
-			var new_value = min(max(effective.get(property.name) + bonus, 1), 999999)
+			var new_value = effective.get(property.name) + bonus
 			if property.type == TYPE_INT:
 				new_value = int(round(new_value))
 			effective.set(property.name, new_value)
@@ -125,6 +125,20 @@ func purchase(id: String) -> bool:
 
 func reset_levels() -> void:
 	levels.clear()
+	_save_levels()
+
+
+## Debug helper: sets every upgrade to [param level] (clamped to each upgrade's
+## max_level). If [param include_enemy_debuffs] is false (default), upgrades whose
+## stat_key targets enemy stats (stat_key starting with "enemy_") are left untouched.
+func debug_set_all_levels(level: int, include_enemy_debuffs: bool = false) -> void:
+	for id in upgrades.keys():
+		var upgrade: Upgrade = upgrades[id]
+		if not include_enemy_debuffs and upgrade.stat_key.begins_with(ENEMY_STAT_PREFIX):
+			continue
+		var clamped_level := clampi(level, 0, upgrade.max_level)
+		levels[id] = clamped_level
+		upgrade_purchased.emit(id, clamped_level)
 	_save_levels()
 
 
